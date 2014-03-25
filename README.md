@@ -1,2 +1,2 @@
-doutor-facil-mobile
+Dr. Facil - Android Client
 ===================
