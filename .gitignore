@@ -40,6 +40,8 @@ proguard/
 .idea/dataSources.xml
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
+# uiDesigner thrash
+.idea/uiDesigner.xml
 
 ## File-based project format
 *.iws
