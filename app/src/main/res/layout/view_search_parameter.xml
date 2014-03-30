@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="7dp"
+    android:background="#AAFFFFFF"
+    >
+
+    <!-- TODO: Extract style -->
+
+    <TextView
+        android:id="@+id/search_parameter_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="-3dp"
+        android:text="@string/to_be_changed_programmatically"
+        android:textSize="16sp"
+
+        />
+
+    <TextView
+        android:id="@+id/search_parameter_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_parameter_label"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="-3dp"
+        android:text="@string/to_be_changed_programmatically"
+        android:textSize="12sp"
+        android:textColor="#99000000"
+        />
+
+    <ImageView
+        android:id="@+id/search_parameter_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/search_parameter_value"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_action_business_holo_light"
+        android:contentDescription="@string/todo_content_description"
+        />
+
+</RelativeLayout>
