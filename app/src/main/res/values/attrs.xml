@@ -5,6 +5,7 @@
         <attr name="icon" format="reference"/>
         <attr name="label" format="string" />
         <attr name="value" format="string" />
+        <attr name="compact" format="boolean" />
     </declare-styleable>
 
 </resources>

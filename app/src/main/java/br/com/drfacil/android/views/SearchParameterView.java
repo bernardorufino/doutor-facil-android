@@ -50,9 +50,14 @@ public class SearchParameterView extends FrameLayout {
             setIcon(array.getDrawable(R.styleable.SearchParameterView_icon));
             setLabel(array.getString(R.styleable.SearchParameterView_label));
             setValue(array.getString(R.styleable.SearchParameterView_value));
+            setCompact(array.getBoolean(R.styleable.SearchParameterView_compact, false));
         } finally {
             array.recycle();
         }
+    }
+
+    private void setCompact(boolean compact) {
+
     }
 
     private void setValue(String value) {

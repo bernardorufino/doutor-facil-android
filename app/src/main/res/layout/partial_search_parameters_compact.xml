@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- TODO: Unhardcode values -->
-<!-- TODO: Extract style -->
-
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -25,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="@dimen/half_search_parameter_space"
+            custom:compact="true"
             custom:label="Especialidade"
             custom:value="Todas"
             custom:icon="@drawable/ic_action_business_holo_light"
@@ -35,24 +32,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="@dimen/half_search_parameter_space"
+            custom:compact="true"
             custom:label="Localização"
             custom:value="Perto de meu lugar"
             custom:icon="@drawable/ic_action_location_holo_light"
             />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        >
 
         <br.com.drfacil.android.views.SearchParameterView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="@dimen/half_search_parameter_space"
+            custom:compact="true"
             custom:label="Data"
             custom:value="Amanhã"
             custom:icon="@drawable/ic_action_calendar_day_holo_light"
@@ -63,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="@dimen/half_search_parameter_space"
+            custom:compact="true"
             custom:label="Seguro de Saúde"
             custom:value="Nenhum"
             custom:icon="@drawable/ic_action_creditcard_holo_light"
