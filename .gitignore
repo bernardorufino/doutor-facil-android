@@ -41,8 +41,11 @@ proguard/
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 # others
+.idea/inspectionProfiles/
 .idea/uiDesigner.xml
 .idea/codeStyleSettings.xml
+# let gradle handle the heavy stuff =)
+.idea/libraries/
 
 ## File-based project format
 *.iws
