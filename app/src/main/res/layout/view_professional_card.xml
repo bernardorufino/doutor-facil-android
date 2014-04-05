@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card"
+    android:layout_margin="2.5dp"
+    >
+
+    <br.com.drfacil.android.ext.image.UrlImageView
+        android:id="@+id/professional_card_image"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:scaleType="centerCrop"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/professional_card_image"
+        android:layout_alignBottom="@id/professional_card_image"
+        android:layout_alignRight="@id/professional_card_image"
+        android:layout_alignLeft="@id/professional_card_image"
+        android:padding="@dimen/professional_card_padding"
+        >
+
+
+
+        <TextView
+            android:id="@+id/professional_card_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ProfessionalCardName"
+            />
+
+
+    </RelativeLayout>
+
+
+    <!-- TODO: Fix this shit -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/professional_card_image"
+        android:padding="@dimen/professional_card_padding"
+        >
+
+        <TextView
+            android:id="@+id/professional_card_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/professional_card_name"
+            android:textSize="11sp"
+            android:textColor="#666666"
+            android:lines="2"
+            />
+
+        <TextView
+            android:id="@+id/professional_card_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

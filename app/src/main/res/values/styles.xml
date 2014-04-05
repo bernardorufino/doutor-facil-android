@@ -1,4 +1,23 @@
 <resources>
 
 
+    <style name="CompactSearchParameterViewDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">#22FFFFFF</item>
+    </style>
+
+    <style name="ProfessionalCardName">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lines">1</item>
+        <item name="android:textColor">@color/professional_card_name_color</item>
+        <item name="android:shadowColor">@color/professional_card_name_shadow</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
 </resources>

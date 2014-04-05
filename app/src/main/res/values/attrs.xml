@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="icon" format="reference"/>
+    <attr name="label" format="string" />
+    <attr name="value" format="string" />
+
     <declare-styleable name="SearchParameterView">
-        <attr name="icon" format="reference"/>
-        <attr name="label" format="string" />
-        <attr name="value" format="string" />
+        <attr name="icon" />
+        <attr name="label" />
+        <attr name="value" />
+    </declare-styleable>
+
+    <declare-styleable name="CompactSearchParameterView">
+        <attr name="icon" />
+        <attr name="label" />
+        <attr name="value" />
+    </declare-styleable>
+
+    <declare-styleable name="UrlImageView">
+        <attr name="url" format="string" />
     </declare-styleable>
 
 </resources>
