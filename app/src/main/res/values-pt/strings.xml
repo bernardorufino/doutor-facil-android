@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dr. Fácil</string>
+
+    <string name="settings_label">Configurações</string>
+    <string name="specialty_label">Especialidade</string>
+    <string name="location_label">Localização</string>
+    <string name="date_label">Data</string>
+    <string name="insurance_label">Seguro de Saúde</string>
+    <string name="my_appointments_label">Minhas Consultas</string>
+    <string name="search_label">Pesquisa</string>
+
+</resources>

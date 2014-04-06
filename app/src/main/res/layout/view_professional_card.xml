@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/ProfessionalCardContainer"
+    >
+
+    <br.com.drfacil.android.ext.image.UrlImageView
+        android:id="@+id/professional_card_image"
+        style="@style/ProfessionalCardImage"
+        />
+
+    <TextView
+        android:id="@+id/professional_card_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/professional_card_image"
+        android:layout_alignLeft="@id/professional_card_image"
+        style="@style/ProfessionalCardName"
+        />
+
+    <View style="@style/ProfessionalCardRatingShadowLayer" />
+
+    <br.com.drfacil.android.views.RatingView
+        android:id="@+id/professional_card_rating"
+        android:layout_alignBottom="@id/professional_card_image"
+        android:layout_alignRight="@id/professional_card_image"
+        style="@style/ProfessionalCardRatingView"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/professional_card_image"
+        style="@style/ProfessionalCardDescContainer"
+        >
+
+        <TextView
+            android:id="@+id/professional_card_specialty"
+            android:drawableLeft="@drawable/ic_action_business_holo_light"
+            style="@style/ProfessionalCardDescText"
+            />
+
+        <TextView
+            android:id="@+id/professional_card_address"
+            android:drawableLeft="@drawable/ic_action_location_holo_light"
+            style="@style/ProfessionalCardDescText"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
