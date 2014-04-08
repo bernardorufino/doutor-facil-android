@@ -13,23 +13,19 @@
         layout="@layout/partial_search_parameters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         />
 
-    <ListView
+<GridView
         android:id="@+id/search_results"
-        android:layout_below="@id/search_parameters"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/search_parameters"
+        android:layout_alignParentTop="true"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
-
-    <View
-        android:id="@+id/search_parameter_fade"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@id/search_parameters"
-        android:background="@drawable/search_parameters_fade"
+        android:padding="5dp"
+        android:clipToPadding="false"
         />
 
 </RelativeLayout>

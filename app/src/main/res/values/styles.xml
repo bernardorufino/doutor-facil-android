@@ -1,6 +1,9 @@
 <resources>
 
+    <!-- TODO: Extract dimensions -->
+
     <!-- Appointment Card -->
+
     <style name="AppointmentCardContainer">
         <item name="android:background">@drawable/card</item>
         <item name="android:layout_margin">3dp</item>
@@ -39,6 +42,87 @@
     <style name="AppointmentCardAddress">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/appointment_card_text</item>
+    </style>
+
+    <!-- ProfessionalCard -->
+
+    <style name="ProfessionalCardContainer">
+        <item name="android:background">@drawable/card</item>
+        <item name="android:layout_margin">2.5dp</item>
+    </style>
+
+    <style name="ProfessionalCardName">
+        <item name="android:paddingLeft">@dimen/professional_card_padding</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lines">2</item>
+        <item name="android:textColor">@color/professional_card_name_text</item>
+        <item name="android:shadowColor">@color/professional_card_name_shadow</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:background">@drawable/professional_card_name_bg</item>
+    </style>
+
+    <style name="ProfessionalCardDescContainer">
+        <item name="android:paddingBottom">7.5dp</item>
+        <item name="android:paddingLeft">7.5dp</item>
+        <item name="android:paddingTop">3dp</item>
+    </style>
+
+    <style name="ProfessionalCardDescText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">-5dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/professional_card_desc_text</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ProfessionalCardImage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">145dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:tint">@color/professional_card_image_tint</item>
+    </style>
+
+    <style name="ProfessionalCardRatingShadowLayer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_alignBottom">@id/professional_card_image</item>
+        <item name="android:background">@drawable/professional_card_rating_bg</item>
+    </style>
+
+    <style name="ProfessionalCardRatingView">
+        <item name="android:layout_width">105dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginBottom">-5dp</item>
+        <item name="android:layout_marginRight">-5dp</item>
+    </style>
+
+    <!-- Search Parameter Container -->
+
+    <style name="SearchParameterViewDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@color/search_parameter_divider</item>
+    </style>
+
+    <!-- Search Parameter -->
+
+    <style name="SearchParameterValue">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/search_parameter_value_text</item>
+    </style>
+
+    <style name="SearchParameterIcon">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
     </style>
 
 </resources>

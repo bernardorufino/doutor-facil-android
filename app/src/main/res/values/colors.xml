@@ -2,10 +2,25 @@
 <resources>
 
     <color name="transparent">#00000000</color>
-    <color name="search_parameters_bg">#FFEEEEEE</color>
-    <color name="search_bg">#FFEEEEEE</color>
+
+    <!-- Appointments -->
+
     <color name="appointment_card_title">#99000000</color>
     <color name="appointment_bg">#E1E1E1</color>
     <color name="appointment_card_text">#878787</color>
+
+    <!-- Search -->
+
+    <color name="search_parameter_value_text">#FFFFFFFF</color>
+    <color name="search_parameter_divider">#22FFFFFF</color>
+    <color name="search_parameters_bg">#FF458149</color>
+    <color name="search_bg">#FFE8E8E8</color>
+
+    <!-- Professional Card -->
+
+    <color name="professional_card_name_text">#FFFFFFFF</color>
+    <color name="professional_card_name_shadow">#FF000000</color>
+    <color name="professional_card_desc_text">#FF666666</color>
+    <color name="professional_card_image_tint">#22000000</color>
 
 </resources>

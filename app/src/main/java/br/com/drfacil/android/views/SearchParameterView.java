@@ -33,22 +33,20 @@ public class SearchParameterView extends FrameLayout {
     private void init(AttributeSet attrs) {
         initView();
         if (attrs != null) {
-            initAttributes(attrs);
+            initAttrs(attrs);
         }
     }
 
     private void initView() {
         inflate(getContext(), R.layout.view_search_parameter, this);
-        vLabel = (TextView) findViewById(R.id.search_parameter_label);
         vValue = (TextView) findViewById(R.id.search_parameter_value);
         vIcon = (ImageView) findViewById(R.id.search_parameter_icon);
     }
 
-    private void initAttributes(AttributeSet attrs) {
+    private void initAttrs(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.SearchParameterView);
         try {
             setIcon(array.getDrawable(R.styleable.SearchParameterView_icon));
-            setLabel(array.getString(R.styleable.SearchParameterView_label));
             setValue(array.getString(R.styleable.SearchParameterView_value));
         } finally {
             array.recycle();

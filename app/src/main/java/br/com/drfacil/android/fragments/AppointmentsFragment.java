@@ -8,8 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.drfacil.android.R;
+import br.com.drfacil.android.activities.MainActivity;
 
 public class AppointmentsFragment extends Fragment {
+
+    public static final MainActivity.HostInfo HOST_INFO = new MainActivity.HostInfo(
+            R.string.my_appointments_label,
+            AppointmentsFragment.class);
 
     private ListView mAppointmentsList;
     private ArrayAdapter<String> mAppointmentsAdapter;

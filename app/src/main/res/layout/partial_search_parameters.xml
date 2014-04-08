@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- TODO: Unhardcode values -->
-<!-- TODO: Extract style -->
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/half_search_parameter_space"
     android:background="@color/search_parameters_bg"
     >
 
@@ -19,52 +15,48 @@
         android:orientation="horizontal"
         >
 
+        <!-- TODO: Unhardcode values -->
+
         <br.com.drfacil.android.views.SearchParameterView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="@dimen/half_search_parameter_space"
-            custom:label="Especialidade"
+            custom:label="@string/specialty_label"
             custom:value="Todas"
-            custom:icon="@drawable/ic_action_business_holo_light"
+            custom:icon="@drawable/ic_action_business_white"
             />
+
+        <View style="@style/SearchParameterViewDivider" />
 
         <br.com.drfacil.android.views.SearchParameterView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="@dimen/half_search_parameter_space"
-            custom:label="Localização"
-            custom:value="Perto de meu lugar"
-            custom:icon="@drawable/ic_action_location_holo_light"
+            custom:label="@string/location_label"
+            custom:value="Nearby"
+            custom:icon="@drawable/ic_action_location_white"
             />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        >
+        <View style="@style/SearchParameterViewDivider" />
 
         <br.com.drfacil.android.views.SearchParameterView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="@dimen/half_search_parameter_space"
-            custom:label="Data"
+            custom:label="@string/date_label"
             custom:value="Amanhã"
-            custom:icon="@drawable/ic_action_calendar_day_holo_light"
+            custom:icon="@drawable/ic_action_calendar_day_white"
             />
+
+        <View style="@style/SearchParameterViewDivider" />
 
         <br.com.drfacil.android.views.SearchParameterView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="@dimen/half_search_parameter_space"
-            custom:label="Seguro de Saúde"
+            custom:label="@string/insurance_label"
             custom:value="Nenhum"
-            custom:icon="@drawable/ic_action_creditcard_holo_light"
+            custom:icon="@drawable/ic_action_creditcard_white"
             />
 
     </LinearLayout>

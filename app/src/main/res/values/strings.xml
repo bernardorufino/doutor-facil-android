@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">DrFacil</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="to_be_changed_programmatically">Foo</string>
-    <string name="todo_content_description"></string>
+    <string name="app_name">Dr. Easy</string>
+
+    <string name="settings_label">Settings</string>
+    <string name="specialty_label">Specialty</string>
+    <string name="location_label">Location</string>
+    <string name="date_label">Date</string>
+    <string name="insurance_label">Insurance</string>
+
+    <!-- Use for internal context only -->
+    <string name="to_be_changed_programmatically"></string>
+    <string name="todo"></string>
+    <string name="my_appointments_label">Minhas Consultas</string>
+    <string name="search_label">Pesquisa</string>
 
 </resources>

@@ -14,18 +14,17 @@ import br.com.drfacil.android.ext.tabbed.SimpleFragmentPagerAdapter;
 import br.com.drfacil.android.ext.tabbed.SynchronizedTabListenerAdapter;
 import br.com.drfacil.android.ext.tabbed.SynchronizedViewChangeListenerAdapter;
 import br.com.drfacil.android.fragments.AppointmentsFragment;
-import br.com.drfacil.android.fragments.SearchFragment;
+import br.com.drfacil.android.fragments.search.SearchFragment;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends FragmentActivity {
 
-    /* TODO: Resourcify strings */
-    public static final String[] TABS = { "Pesquisa", "Minhas Consultas" };
-    public static final List<Class<? extends Fragment>> FRAGMENTS = Arrays.asList(
-            SearchFragment.class,
-            AppointmentsFragment.class);
+    public static final HostInfo[] FRAGMENTS = {
+            SearchFragment.HOST_INFO,
+            AppointmentsFragment.HOST_INFO
+    };
 
     private ViewPager mViewPager;
     private FragmentPagerAdapter mPagerAdapter;
@@ -33,28 +32,34 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeView(savedInstanceState);
-        initializeTabs();
+        initView(savedInstanceState);
+        initTabs();
     }
 
-    private void initializeView(Bundle savedInstanceState) {
+    private void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         mViewPager = (ViewPager) findViewById(R.id.pager);
     }
 
-    private void initializeTabs() {
+    private void initTabs() {
+        List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(FRAGMENTS.length);
+        for (HostInfo info : FRAGMENTS) {
+            fragmentClasses.add(info.fragmentClass);
+        }
+
         // Sets the adapter, who will provide the fragments, to the ViewPager (in layout)
         mPagerAdapter = new SimpleFragmentPagerAdapter.Builder()
-            .byFragmentClasses(FRAGMENTS)
-            .setFragmentManager(getSupportFragmentManager())
-            .build();
+                .byFragmentClasses(fragmentClasses)
+                .setFragmentManager(getSupportFragmentManager())
+                .build();
         mViewPager.setAdapter(mPagerAdapter);
 
         // Tabs > view pager
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         ActionBar.TabListener tabListener = new SynchronizedTabListenerAdapter().setViewPager(mViewPager);
-        for (String label : TABS) {
+        for (HostInfo info : FRAGMENTS) {
+            String label = getString(info.labelStringId);
             ActionBar.Tab tab = actionBar
                     .newTab()
                     .setText(label)
@@ -63,7 +68,8 @@ public class MainActivity extends FragmentActivity {
         }
 
         // View pager > tabs
-        ViewPager.OnPageChangeListener pageChangeListener = new SynchronizedViewChangeListenerAdapter().setActionBar(actionBar);
+        ViewPager.OnPageChangeListener pageChangeListener = new SynchronizedViewChangeListenerAdapter()
+                .setActionBar(actionBar);
         mViewPager.setOnPageChangeListener(pageChangeListener);
     }
 
@@ -77,9 +83,20 @@ public class MainActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.settings_label), Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static class HostInfo {
+
+        public final int labelStringId;
+        public final Class<? extends Fragment> fragmentClass;
+
+        public HostInfo(int labelStringId, Class<? extends Fragment> fragmentClass) {
+            this.labelStringId = labelStringId;
+            this.fragmentClass = fragmentClass;
+        }
     }
 }
