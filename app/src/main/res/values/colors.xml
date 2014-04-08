@@ -4,5 +4,8 @@
     <color name="transparent">#00000000</color>
     <color name="search_parameters_bg">#FFEEEEEE</color>
     <color name="search_bg">#FFEEEEEE</color>
+    <color name="appointment_card_title">#99000000</color>
+    <color name="appointment_bg">#E1E1E1</color>
+    <color name="appointment_card_text">#878787</color>
 
 </resources>

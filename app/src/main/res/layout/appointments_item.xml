@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/appointments_item"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/appointment_card_container_height"
+    style="@style/AppointmentCardContainer">
+
+    <!-- TODO: Unhardcode-->
+
+    <ImageView
+        android:id="@+id/appointment_doctor_image"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/doctor"
+        style="@style/AppointmentCardDoctorImage"
+        />
+
+    <TextView
+        android:id="@+id/appointment_doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/appointment_doctor_image"
+        android:layout_alignTop="@id/appointment_doctor_image"
+        android:text="Dr. Paulo Matias"
+        style="@style/AppointmentCardDoctorName"
+        />
+
+    <ImageView
+        android:id="@+id/appointment_calendar_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/appointment_card_icon_height"
+        android:layout_below="@id/appointment_doctor_name"
+        android:layout_toRightOf="@id/appointment_doctor_image"
+        android:src="@drawable/ic_action_calendar_day_holo_light"
+        style="@style/AppointmentCardIcon"
+        />
+
+    <TextView
+        android:id="@+id/appointment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/appointment_calendar_icon"
+        android:layout_alignTop="@id/appointment_calendar_icon"
+        android:text="Terça-feira, 24 de março"
+        style="@style/AppointmentCardDate"
+        />
+
+    <TextView
+        android:id="@+id/appointment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appointment_date"
+        android:layout_toRightOf="@id/appointment_calendar_icon"
+        android:text="15:30"
+        style="@style/AppointmentCardTime"
+        />
+
+    <ImageView
+        android:id="@+id/appointment_location_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/appointment_card_icon_height"
+        android:layout_toRightOf="@id/appointment_doctor_image"
+        android:layout_below="@id/appointment_calendar_icon"
+        android:src="@drawable/ic_action_location_holo_light"
+        style="@style/AppointmentCardIcon"
+        />
+
+    <TextView
+        android:id="@+id/appointment_address_line_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/appointment_location_icon"
+        android:layout_alignTop="@id/appointment_location_icon"
+        android:text="Rua Poeta Zezito, Nº 38"
+        style="@style/AppointmentCardAddress"
+        />
+
+    <!-- TODO: Remove this item -->
+    <TextView
+        android:id="@+id/appointment_address_line_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/appointment_location_icon"
+        android:layout_below="@id/appointment_address_line_1"
+        android:layout_marginTop="-3dp"
+        android:text="Recife, PE"
+        android:textSize="12sp"
+        android:textColor="@color/appointment_card_text"
+        />
+
+</RelativeLayout>

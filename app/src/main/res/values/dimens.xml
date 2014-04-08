@@ -4,4 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="half_search_parameter_space">2dp</dimen>
 
+    <!-- Appointment Card -->
+    <dimen name="appointment_card_container_height">115dp</dimen>
+    <dimen name="appointment_card_icon_height">35dp</dimen>
+
 </resources>
