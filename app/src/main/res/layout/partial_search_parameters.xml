@@ -2,18 +2,14 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:background="@color/search_parameters_bg"
+    tools:ignore="Overdraw"
     >
-
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        >
 
         <!-- TODO: Unhardcode values -->
 
@@ -58,7 +54,5 @@
             custom:value="Nenhum"
             custom:icon="@drawable/ic_action_creditcard_white"
             />
-
-    </LinearLayout>
 
 </LinearLayout>

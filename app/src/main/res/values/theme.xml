@@ -3,7 +3,7 @@
 
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.Actionbar">
-
+        <item name="android:windowBackground">@color/bg</item>
     </style>
 
 </resources>

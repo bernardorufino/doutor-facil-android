@@ -8,11 +8,11 @@
     <string name="location_label">Location</string>
     <string name="date_label">Date</string>
     <string name="insurance_label">Insurance</string>
+    <string name="my_appointments_label">My Appointments</string>
+    <string name="search_label">Search</string>
 
     <!-- Use for internal context only -->
-    <string name="to_be_changed_programmatically"></string>
-    <string name="todo"></string>
-    <string name="my_appointments_label">Minhas Consultas</string>
-    <string name="search_label">Pesquisa</string>
+    <string name="to_be_changed_programmatically" translatable="false"></string>
+    <string name="todo" translatable="false"></string>
 
 </resources>
