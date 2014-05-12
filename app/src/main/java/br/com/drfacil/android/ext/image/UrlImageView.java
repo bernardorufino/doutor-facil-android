@@ -18,7 +18,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 /* TODO: Add loading placeholder */
 public class UrlImageView extends ImageView {
 
-    private static final float CACHE_PER_RAM_RATIO = 1/8f;
     public static final int FADE_DURATION = 400;
 
     private static Downloader<CachedBitmapDownloader.BitmapInfo> sDownloader;
