@@ -15,6 +15,35 @@
         android:layout_alignParentBottom="true"
         />
 
+    <FrameLayout
+        android:id="@+id/loading_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="@dimen/search_center_padding"
+        >
+
+        <ProgressBar
+            android:id="@+id/loading_spin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/retry_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="@dimen/search_center_padding"
+        >
+
+        <include layout="@layout/partial_retry" />
+
+    </FrameLayout>
+
     <GridView
         android:id="@+id/search_results"
         android:layout_above="@id/search_parameters"

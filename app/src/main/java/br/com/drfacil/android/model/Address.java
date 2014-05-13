@@ -88,6 +88,11 @@ public class Address extends Model implements Parcelable {
         return mCountry;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s %s (%s), %s, %s, %s", mStreet, mNumber, mComplement, mZip, mCity, mState, mCountry);
+    }
+
     public static final Creator<Address> CREATOR = new Creator<Address>() {
 
         @Override
