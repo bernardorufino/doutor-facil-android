@@ -1,13 +1,44 @@
 package br.com.drfacil.android;
 
 import br.com.drfacil.android.model.Address;
+import br.com.drfacil.android.model.Insurance;
 import br.com.drfacil.android.model.Professional;
+import br.com.drfacil.android.model.Specialty;
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
 /* TODO: Permanent TODO until this file gets deleted */
 public class Hardcoded {
+
+    public static List<Insurance> INSURANCES = ImmutableList.of(
+            new Insurance("Sulamerica"),
+            new Insurance("Unimed"),
+            new Insurance("Amil"),
+            new Insurance("Porto Seguro"),
+            new Insurance("Bradesco"),
+            new Insurance("Liberty")
+    );
+
+    public static List<Specialty> SPECIALTIES = ImmutableList.of(
+            new Specialty("Cirurgião"),
+            new Specialty("Podólogo"),
+            new Specialty("Ajudante"),
+            new Specialty("Neurologista"),
+            new Specialty("Cardiologista"),
+            new Specialty("Pediatra"),
+            new Specialty("Otorrinolaringologista"),
+            new Specialty("Pediatra"),
+            new Specialty("Ginecologista"),
+            new Specialty("Androlaringolista"),
+            new Specialty("Urologista"),
+            new Specialty("Angiologista"),
+            new Specialty("Dermatologista"),
+            new Specialty("Oftalmologista"),
+            new Specialty("Oncologista"),
+            new Specialty("Mastologista"),
+            new Specialty("Cagurologista")
+    );
 
     public static List<Professional> PROFESSIONALS = ImmutableList.of(
             new Professional(
@@ -87,6 +118,7 @@ public class Hardcoded {
                     new Address(1, "Rua H22A", "12228-453", "123", "", "Rio de Janeiro", "RJ", "Brazil"),
                     "Neuroalgumacoisa",
                     "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t1.0-1/p160x160/971516_520668877987014_1987117223_n.jpg",
-                    3));
+                    3)
+    );
 
 }

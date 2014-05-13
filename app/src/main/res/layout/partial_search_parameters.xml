@@ -14,6 +14,7 @@
         <!-- TODO: Unhardcode values -->
 
         <br.com.drfacil.android.views.SearchParameterView
+            android:id="@+id/search_parameter_specialy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -25,6 +26,7 @@
         <View style="@style/SearchParameterViewDivider" />
 
         <br.com.drfacil.android.views.SearchParameterView
+            android:id="@+id/search_parameter_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -36,6 +38,7 @@
         <View style="@style/SearchParameterViewDivider" />
 
         <br.com.drfacil.android.views.SearchParameterView
+            android:id="@+id/search_parameter_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,6 +50,7 @@
         <View style="@style/SearchParameterViewDivider" />
 
         <br.com.drfacil.android.views.SearchParameterView
+            android:id="@+id/search_parameter_insurance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
