@@ -53,10 +53,7 @@ public class UrlImageView extends ImageView {
 
     private void initCache() {
         if (sDownloader == null) {
-            long maxMemory = Runtime.getRuntime().maxMemory() / 1024;
-            int cacheSize = (int) (maxMemory * CACHE_PER_RAM_RATIO);
-            CustomHelper.log("UrlImageView cache size = " + cacheSize + " KB");
-            sDownloader = new CachedBitmapDownloader(cacheSize);
+            sDownloader = CachedBitmapDownloader.getInstance(getContext());
         }
         mDownloader = sDownloader;
     }
