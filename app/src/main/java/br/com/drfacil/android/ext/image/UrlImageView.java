@@ -125,9 +125,14 @@ public class UrlImageView extends ImageView {
             setPlaceholder();
         }
 
+        // True indicates that it has handled the callback, so return immediately
         private boolean onFinish() {
-            mFuture = null;
-            return !mUrl.equals(UrlImageView.this.mUrl);
+            boolean handled = !mUrl.equals(UrlImageView.this.mUrl);
+            if (!handled) {
+                // This is our request, thus we can clean mFuture now
+                mFuture = null;
+            }
+            return handled;
         }
 
     }
