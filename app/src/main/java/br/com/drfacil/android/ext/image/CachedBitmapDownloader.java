@@ -26,7 +26,7 @@ public class CachedBitmapDownloader
         implements Downloader<CachedBitmapDownloader.BitmapInfo> {
 
     private static final int DISK_CACHE_SIZE = 16 * 1024 * 1024; // In bytes
-    private static final float MEMORY_CACHE_PER_RAM_RATIO = 1/8f; // In bytes
+    private static final float MEMORY_CACHE_PER_RAM_RATIO = 1/8f;
     private static final int RETRY_TIMES = 3;
 
     private static CachedBitmapDownloader sInstance;

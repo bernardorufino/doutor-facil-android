@@ -2,7 +2,6 @@ package br.com.drfacil.android.ext.cache;
 
 import android.os.AsyncTask;
 import android.support.v4.util.LruCache;
-import com.google.common.base.Throwables;
 import com.google.common.io.Closer;
 import com.jakewharton.disklrucache.DiskLruCache;
 
@@ -19,7 +18,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static com.google.common.base.Preconditions.checkState;
 
-/* TODO: Make it work without disk cache */
 public abstract class AbstractTwoLevelCache<K, V> {
 
     private final Map<String, Lock> mLocks = new HashMap<>();
@@ -33,11 +31,13 @@ public abstract class AbstractTwoLevelCache<K, V> {
             int maxDiskSizeInBytes,
             int maxMemorySizeInBytes) {
         mMemoryCache = new MemoryCache(maxMemorySizeInBytes);
+        DiskLruCache diskCache;
         try {
-            mDiskCache = DiskLruCache.open(diskCacheDirectory, appVersion, 1, maxDiskSizeInBytes);
+            diskCache = DiskLruCache.open(diskCacheDirectory, appVersion, 1, maxDiskSizeInBytes);
         } catch (IOException e) {
-            throw Throwables.propagate(e);
+            diskCache = null;
         }
+        mDiskCache = diskCache;
     }
 
     protected abstract ValueHolder<V> create(K key);
@@ -63,7 +63,9 @@ public abstract class AbstractTwoLevelCache<K, V> {
         if (mMemoryCache.snapshot().containsKey(key)) return Location.MEMORY;
         try {
             String hashedKey = hash(key);
-            if (mDiskCache.get(hashedKey) != null) return Location.DISK;
+            if (mDiskCache != null && mDiskCache.get(hashedKey) != null) {
+                return Location.DISK;
+            }
         } catch (IOException e) {
             /* Empty */
         }
@@ -71,6 +73,8 @@ public abstract class AbstractTwoLevelCache<K, V> {
     }
 
     private Lock getDiskLock(String hashedKey) {
+        checkState(mDiskCache != null);
+
         Lock lock = mLocks.get(hashedKey);
         if (lock == null) {
             lock = new ReentrantLock();
@@ -84,6 +88,8 @@ public abstract class AbstractTwoLevelCache<K, V> {
     }
 
     private void postStoreOnDisk(String hashedKey, V value) {
+        checkState(mDiskCache != null);
+
         //noinspection unchecked
         new StoreOnDiskTask(hashedKey, value).executeOnExecutor(mExecutor);
     }
@@ -138,12 +144,8 @@ public abstract class AbstractTwoLevelCache<K, V> {
             AbstractTwoLevelCache.this.entryRemoved(evicted, key, oldValue.value, newValue.value);
         }
 
-        @Override
-        protected ValueHolder<V> create(K key) {
-            String hashedKey = hash(key);
+        public ValueHolder<V> tryGetFromDisk(String hashedKey) {
             ValueHolder<V> valueHolder = null;
-
-            // Try to get from the disk
             Closer closer = Closer.create();
             // Because of sync need https://code.google.com/p/guava-libraries/wiki/ClosingResourcesExplained#Closer
             try {
@@ -165,12 +167,26 @@ public abstract class AbstractTwoLevelCache<K, V> {
             } catch (IOException e) {
                 handleDiskException(e);
             }
-            if (valueHolder != null) return valueHolder;
+            return valueHolder;
+        }
+
+        @Override
+        protected ValueHolder<V> create(K key) {
+            String hashedKey = hash(key);
+            ValueHolder<V> valueHolder;
+
+            // Try to get from the disk
+            if (mDiskCache != null) {
+                valueHolder = tryGetFromDisk(hashedKey);
+                if (valueHolder != null) return valueHolder;
+            }
 
             // If it's not on the disk or it failed, we create it and try to put on disk
             valueHolder = AbstractTwoLevelCache.this.create(key);
-            // Post to another thread since we no longer have to wait for the disk
-            postStoreOnDisk(hashedKey, valueHolder.value);
+            if (mDiskCache != null) {
+                // Post to another thread since we no longer have to wait for the disk
+                postStoreOnDisk(hashedKey, valueHolder.value);
+            }
             return valueHolder;
         }
 
