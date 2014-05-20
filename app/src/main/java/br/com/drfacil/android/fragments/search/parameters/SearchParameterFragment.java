@@ -4,38 +4,55 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import br.com.drfacil.android.R;
 import br.com.drfacil.android.model.search.Search;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class SearchParameterFragment extends DialogFragment {
 
     private final Search mSearch;
-
-    public static <T extends SearchParameterFragment> T show(
-            Search search,
-            Class<T> fragmentClass,
-            FragmentManager fragmentManager) {
-        try {
-            T fragment = fragmentClass.getConstructor(Search.class).newInstance(search);
-            fragment.show(fragmentManager, fragmentClass.toString());
-            return fragment;
-        } catch (NoSuchMethodException |
-                java.lang.InstantiationException |
-                IllegalAccessException |
-                InvocationTargetException e) {
-            AssertionError error = new AssertionError();
-            error.initCause(e);
-            throw error;
-        }
-    }
+    private Button vOkButton;
+    private Button vDismissButton;
 
     public SearchParameterFragment(Search search) {
         mSearch = search;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        vOkButton = (Button) getView().findViewById(R.id.search_parameter_ok_button);
+        if (vOkButton != null) vOkButton.setOnClickListener(mOnOkButtonClickListener);
+        vDismissButton = (Button) getView().findViewById(R.id.search_parameter_dismiss_button);
+        if (vDismissButton != null) vDismissButton.setOnClickListener(mOnDismissButtonClickListener);
+    }
+
+    private View.OnClickListener mOnOkButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            onOk();
+        }
+    };
+
+    private View.OnClickListener mOnDismissButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            onDismiss();
+        }
+    };
+
+    protected void onOk() {
+        setFinished();
+        dismiss();
+    }
+
+    protected void onDismiss() {
+        setAborted();
+        dismiss();
     }
 
     public Search getSearch() {

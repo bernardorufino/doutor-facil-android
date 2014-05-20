@@ -143,4 +143,10 @@
         <item name="android:layout_marginTop">1dp</item>
     </style>
 
+    <style name="SearchParameterDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/search_parameter_buttons_border</item>
+    </style>
+
 </resources>

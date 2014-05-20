@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import br.com.drfacil.android.Params;
 import br.com.drfacil.android.ext.cache.AbstractTwoLevelCache;
+import br.com.drfacil.android.helpers.CacheHelper;
 import br.com.drfacil.android.helpers.CustomHelper;
 import com.google.common.base.Throwables;
 import com.google.common.io.BaseEncoding;
@@ -26,17 +27,18 @@ public class CachedBitmapDownloader
         implements Downloader<CachedBitmapDownloader.BitmapInfo> {
 
     private static final int DISK_CACHE_SIZE = 16 * 1024 * 1024; // In bytes
-    private static final float MEMORY_CACHE_PER_RAM_RATIO = 1/8f;
+    private static final float MEMORY_CACHE_PER_RAM_RATIO = 1/80f;
     private static final int RETRY_TIMES = 3;
 
     private static CachedBitmapDownloader sInstance;
 
-    public static CachedBitmapDownloader getInstance(Context context) {
+    public synchronized static CachedBitmapDownloader getInstance(Context context) {
         if (sInstance == null) {
             long maxMemory = Runtime.getRuntime().maxMemory();
             int memoryCacheSize = (int) (maxMemory * MEMORY_CACHE_PER_RAM_RATIO);
+            CustomHelper.log("Using " + (memoryCacheSize/1024) + " KB of memory");
             sInstance = new CachedBitmapDownloader(
-                    context.getCacheDir(),
+                    CacheHelper.createCacheDir(context, CachedBitmapDownloader.class.toString()),
                     Params.APP_VERSION,
                     DISK_CACHE_SIZE,
                     memoryCacheSize);
@@ -58,7 +60,7 @@ public class CachedBitmapDownloader
             try {
                 CustomHelper.log("Attempt #" + i + " of downloading bitmap");
                 URLConnection connection = new URL(url).openConnection();
-                connection.setUseCaches(true);
+                // connection.setUseCaches(true);
                 Bitmap bitmap = BitmapFactory.decodeStream(connection.getInputStream());
                 if (bitmap != null) {
                     CustomHelper.log("Returning bitmap");
@@ -92,7 +94,8 @@ public class CachedBitmapDownloader
     protected void entryRemoved(boolean evicted, String key, Bitmap oldValue, Bitmap newValue) {
         super.entryRemoved(evicted, key, oldValue, newValue);
         CustomHelper.log("<BMP> " + hash(key) + " recycled");
-        oldValue.recycle();
+        /* TODO: Was causing "IllegalStateException: Can't compress a recycled bitmap" on writeToStream, make it work with recycling */
+        //oldValue.recycle();
     }
 
     @Override

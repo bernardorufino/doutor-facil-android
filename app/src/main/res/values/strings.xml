@@ -14,5 +14,15 @@
     <!-- Use for internal context only -->
     <string name="to_be_changed_programmatically" translatable="false"></string>
     <string name="todo" translatable="false"></string>
+    <string name="dismiss_search_param">Dismiss</string>
+    <string name="ok_search_param">Ok</string>
+    <string name="select_insurance_message">Please select insurance plans</string>
+    <string name="select_specialty_message">Please select specialties</string>
+    <string name="retry_default_button_text">Retry</string>
+
+    <string name="error_no_connectivity">No connectivity</string>
+    <string name="error_unknown_network_error">Unknown network error</string>
+    <string name="error_client_error">Local error, if it persists restart the app</string>
+    <string name="error_server_error">Server error, try again later</string>
 
 </resources>

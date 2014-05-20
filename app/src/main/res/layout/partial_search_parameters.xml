@@ -14,12 +14,12 @@
         <!-- TODO: Unhardcode values -->
 
         <br.com.drfacil.android.views.SearchParameterView
-            android:id="@+id/search_parameter_specialy"
+            android:id="@+id/search_parameter_specialty"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             custom:label="@string/specialty_label"
-            custom:value="Todas"
+            custom:value="@string/specialty_label"
             custom:icon="@drawable/ic_action_business_white"
             />
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             custom:label="@string/location_label"
-            custom:value="Nearby"
+            custom:value="@string/location_label"
             custom:icon="@drawable/ic_action_location_white"
             />
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             custom:label="@string/date_label"
-            custom:value="Amanhã"
+            custom:value="@string/date_label"
             custom:icon="@drawable/ic_action_calendar_day_white"
             />
 
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             custom:label="@string/insurance_label"
-            custom:value="Nenhum"
+            custom:value="@string/insurance_label"
             custom:icon="@drawable/ic_action_creditcard_white"
             />
 

@@ -75,6 +75,7 @@
     <orderEntry type="library" exported="" name="guava-jdk5-16.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.0.1" level="project" />
     <orderEntry type="library" exported="" name="retrofit-1.5.1" level="project" />
+    <orderEntry type="library" exported="" name="okhttp-1.5.4" level="project" />
     <orderEntry type="library" exported="" name="disklrucache-2.0.2" level="project" />
   </component>
 </module>

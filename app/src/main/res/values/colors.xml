@@ -11,6 +11,7 @@
 
     <!-- Search -->
 
+    <color name="search_text_on_bg">#FF666666</color>
     <color name="search_parameter_button_bg">#FFDDDDDD</color>
     <color name="search_parameter_buttons_border">#FFD2D2D2</color>
     <color name="search_parameter_list_item">#FF666666</color>

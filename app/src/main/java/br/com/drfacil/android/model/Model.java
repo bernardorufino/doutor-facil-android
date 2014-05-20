@@ -21,4 +21,16 @@ public abstract class Model {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(mId);
     }
+
+    @Override
+    public boolean equals(Object another) {
+        if (another == null || another.getClass() != getClass()) return false;
+        Model model = (Model) another;
+        return mId == model.mId;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (mId ^ (mId >>> 32));
+    }
 }
