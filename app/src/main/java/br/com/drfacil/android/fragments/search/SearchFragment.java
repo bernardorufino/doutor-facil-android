@@ -14,6 +14,7 @@ import br.com.drfacil.android.ext.instance.InstanceFactory;
 import br.com.drfacil.android.ext.instance.LazyWeakFactory;
 import br.com.drfacil.android.ext.observing.Observable;
 import br.com.drfacil.android.ext.observing.Observer;
+import br.com.drfacil.android.ext.scroll.BottomViewToggleOnScrollListener;
 import br.com.drfacil.android.fragments.search.parameters.*;
 import br.com.drfacil.android.helpers.CustomHelper;
 import br.com.drfacil.android.helpers.CustomViewHelper;
@@ -55,6 +56,8 @@ public class SearchFragment extends Fragment
     private ViewGroup vRetryContainer;
     private ViewGroup vLoadingContainer;
     private TextView vRetryMessage;
+    private View vSearchParametersContainer;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,10 @@ public class SearchFragment extends Fragment
         }
         mResultsAdapter = new SearchResultsAdapter(getActivity());
         vSearchResults.setAdapter(mResultsAdapter);
+        vSearchParametersContainer = getView().findViewById(R.id.search_parameters);
+        BottomViewToggleOnScrollListener listener = new BottomViewToggleOnScrollListener(vSearchParametersContainer)
+                .setReversed(true);
+        vSearchResults.setOnScrollListener(listener);
         setSearchViewState(SearchViewState.LOADING);
     }
 

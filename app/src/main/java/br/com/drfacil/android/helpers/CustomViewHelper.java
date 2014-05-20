@@ -7,6 +7,7 @@ import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewManager;
 import android.view.ViewParent;
+import android.widget.AbsListView;
 import android.widget.Adapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -16,6 +17,12 @@ import java.util.*;
 import static com.google.common.base.Preconditions.checkArgument;
 
 public class CustomViewHelper {
+
+    public static int getScrollY(AbsListView view) {
+        View child = view.getChildAt(0);
+        int top = (child == null) ? 0 : child.getTop();
+        return top;
+    }
 
     public static void toggleVisibleGone(View view, boolean visibility) {
         view.setVisibility(visibility ? View.VISIBLE : View.GONE);
