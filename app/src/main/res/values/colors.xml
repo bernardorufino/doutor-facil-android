@@ -6,8 +6,8 @@
     <!-- Appointments -->
 
     <color name="appointment_card_title">#99000000</color>
-    <color name="appointment_bg">#E1E1E1</color>
-    <color name="appointment_card_text">#878787</color>
+    <color name="appointment_card_button_bg">#22000000</color>
+    <color name="appointment_card_button_divider">#ff858585</color>
 
     <!-- Search -->
 

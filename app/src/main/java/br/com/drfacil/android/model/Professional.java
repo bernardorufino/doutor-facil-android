@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+// TODO: Add telephone numbers to model
 public class Professional extends Model implements Parcelable {
 
     public static final int MAX_RATING = 5;

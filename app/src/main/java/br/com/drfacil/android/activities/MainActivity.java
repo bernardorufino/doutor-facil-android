@@ -13,7 +13,7 @@ import br.com.drfacil.android.R;
 import br.com.drfacil.android.ext.tabbed.SimpleFragmentPagerAdapter;
 import br.com.drfacil.android.ext.tabbed.SynchronizedTabListenerAdapter;
 import br.com.drfacil.android.ext.tabbed.SynchronizedViewChangeListenerAdapter;
-import br.com.drfacil.android.fragments.AppointmentsFragment;
+import br.com.drfacil.android.fragments.appointments.AppointmentsFragment;
 import br.com.drfacil.android.fragments.search.SearchFragment;
 
 import java.util.ArrayList;

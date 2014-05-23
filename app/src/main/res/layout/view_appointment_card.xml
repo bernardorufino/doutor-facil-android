@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/appointment_card_height"
+    style="@style/AppointmentCardContainer"
+    >
+
+    <RelativeLayout
+        android:id="@+id/appointment_card_doctor_container"
+        android:layout_width="@dimen/appointment_card_doctor_container_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        >
+
+        <br.com.drfacil.android.ext.image.UrlImageView
+            android:id="@+id/appointment_card_doctor_image"
+            android:layout_width="match_parent"
+            android:layout_height ="match_parent"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:id="@+id/appointment_card_doctor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            style="@style/ProfessionalCardName"
+            />
+
+        <TextView
+            android:id="@+id/appointment_card_specialty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            style="@style/AppointmentCardSpecialty"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/appointment_card_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/appointment_card_doctor_container"
+        android:layout_alignParentTop="true"
+        style="@style/AppointmentCardDate"
+        />
+
+    <LinearLayout
+        android:id="@+id/appointment_card_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appointment_card_button_height"
+        android:layout_toRightOf="@id/appointment_card_doctor_container"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/appointment_card_button_bg"
+        >
+
+        <ImageView
+            android:src="@drawable/ic_action_map_holo_light"
+            style="@style/AppointmentCardButton"
+            />
+
+        <View style="@style/AppointmentCardButtonDivider" />
+
+        <ImageView
+            android:src="@drawable/ic_action_edit_holo_light"
+            style="@style/AppointmentCardButton"
+            />
+
+        <View style="@style/AppointmentCardButtonDivider" />
+
+        <ImageView
+            android:src="@drawable/ic_action_cancel_holo_light"
+            style="@style/AppointmentCardButton"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/appointment_card_buttons"
+        android:layout_below="@id/appointment_card_date"
+        android:layout_toRightOf="@id/appointment_card_doctor_container"
+        style="@style/AppointmentCardDescContainer"
+        >
+
+        <TextView
+            android:id="@+id/appointment_card_location"
+            android:drawableLeft="@drawable/ic_action_location_holo_light"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            style="@style/ProfessionalCardDescText"
+            />
+
+        <!--TODO: Unhardcode telephone number-->
+        <TextView
+            android:drawableLeft="@drawable/ic_action_call_holo_light"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:text="(12) 98232-6102"
+            style="@style/ProfessionalCardDescText"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

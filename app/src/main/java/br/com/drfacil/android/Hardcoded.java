@@ -1,6 +1,7 @@
 package br.com.drfacil.android;
 
 import br.com.drfacil.android.model.Address;
+import br.com.drfacil.android.model.Appointment;
 import br.com.drfacil.android.model.Professional;
 import com.google.common.collect.ImmutableList;
 
@@ -89,4 +90,10 @@ public class Hardcoded {
                     "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t1.0-1/p160x160/971516_520668877987014_1987117223_n.jpg",
                     3));
 
+    public static List<Appointment> APPOINTMENTS = ImmutableList.of(
+            new Appointment(1, PROFESSIONALS.get(0), "15 de Dezembro", "15:30"),
+            new Appointment(2, PROFESSIONALS.get(1), "11 de Fevereiro", "16:30"),
+            new Appointment(3, PROFESSIONALS.get(2), "10 de Março", "19:00"),
+            new Appointment(4, PROFESSIONALS.get(3), "8 de Abril", "10:45"),
+            new Appointment(5, PROFESSIONALS.get(4), "23 de Setembro", "17:00"));
 }
