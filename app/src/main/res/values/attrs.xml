@@ -3,16 +3,16 @@
 
     <declare-styleable name="SearchParameterView">
         <attr name="icon" format="reference"/>
-        <attr name="label" format="string" />
-        <attr name="value" format="string" />
+        <attr name="label" format="string"/>
+        <attr name="value" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="UrlImageView">
-        <attr name="url" format="string" />
+        <attr name="url" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="RatingView">
-        <attr name="rating" format="float" />
+        <attr name="rating" format="float"/>
     </declare-styleable>
 
 </resources>

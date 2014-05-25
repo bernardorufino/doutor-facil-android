@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/search_parameter_buttons_border"
+    >
+
+    <Button
+        android:id="@+id/search_parameter_dismiss_button"
+        android:text="@string/dismiss_search_param"
+        style="@style/SearchParamsButton"
+        />
+
+    <View
+        style="@style/SearchParameterDivider"
+        />
+
+    <Button
+        android:id="@+id/search_parameter_ok_button"
+        android:text="@string/ok_search_param"
+        style="@style/SearchParamsButton"
+        />
+
+</LinearLayout>

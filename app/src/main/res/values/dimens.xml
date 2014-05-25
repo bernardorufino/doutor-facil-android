@@ -6,5 +6,6 @@
     <!-- Appointment Card -->
     <dimen name="appointment_card_container_height">115dp</dimen>
     <dimen name="appointment_card_icon_height">35dp</dimen>
+    <dimen name="search_center_padding">50dp</dimen>
 
 </resources>
