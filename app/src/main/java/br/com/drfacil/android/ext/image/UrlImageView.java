@@ -15,6 +15,8 @@ import com.google.common.base.Objects;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.concurrent.CancellationException;
+
 /* TODO: Add loading placeholder */
 public class UrlImageView extends ImageView {
 
@@ -78,7 +80,11 @@ public class UrlImageView extends ImageView {
         setPlaceholder();
         if (url == null) return;
         if (mFuture != null) {
-            mFuture.cancel(true);
+            // Let the outstanding request, because we cannot cancel it successfully because getInputStream() is not
+            // interruptible, so we allow it to finish and go to cache. Hopefully there won't be too many requests
+            // simultaneously for the same url, so as not to overflow the executor service queue.
+            // TODO: This approach is rather hacky, fix it properly
+            // mFuture.cancel(false);
         }
         mFuture = mDownloader.download(url);
         AsyncHelper.addCallbackOnUiThread(mFuture, new ImageDownloadedCallback(url));
@@ -117,7 +123,9 @@ public class UrlImageView extends ImageView {
         @Override
         public void onFailure(Throwable t) {
             if (onFinish()) return;
-            CustomHelper.logException(t);
+            if (!(t instanceof CancellationException)) {
+                CustomHelper.logException(t);
+            }
             setPlaceholder();
         }
 
