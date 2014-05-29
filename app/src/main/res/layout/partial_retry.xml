@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/retry_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:text="@string/to_be_changed_programmatically"
+        android:textColor="@color/search_text_on_bg"
+        android:drawableLeft="@drawable/ic_action_halt_holo_light"
+        android:gravity="center_vertical"
+        />
+
+    <Button
+        android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/retry_message"
+        android:text="@string/retry_default_button_text"
+        />
+
+</RelativeLayout>
