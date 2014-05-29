@@ -1,20 +1,25 @@
 package br.com.drfacil.android.activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.common.collect.Lists;
+
 import br.com.drfacil.android.R;
 import br.com.drfacil.android.ext.tabbed.SimpleFragmentPagerAdapter;
 import br.com.drfacil.android.fragments.appointments.AppointmentsFragment;
 import br.com.drfacil.android.fragments.search.SearchFragment;
 import br.com.drfacil.android.views.TabContainerView;
 import br.com.drfacil.android.views.TabView;
+import br.com.drfacil.android.fragments.login.LoginFragment;
+import br.com.drfacil.android.managers.AppStateManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,15 +27,18 @@ import java.util.List;
 
 public class MainActivity extends FragmentActivity {
 
-    public static final HostInfo[] FRAGMENTS = {
-            SearchFragment.HOST_INFO,
-            AppointmentsFragment.HOST_INFO
-    };
+    private static List<HostInfo> sFragmentsInfo = Lists.newArrayList(
+        SearchFragment.HOST_INFO,
+        LoginFragment.HOST_INFO
+    );
 
     private ViewPager vViewPager;
     private TabContainerView vTabContainer;
     private TextView vDescription;
-    private FragmentPagerAdapter mPagerAdapter;
+    private ViewPager mViewPager;
+    private ActionBar.TabListener mTabListener;
+    private SimpleFragmentPagerAdapter mPagerAdapter;
+    private AppStateManager mAppStateManager = AppStateManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +55,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initTabs() {
-        List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(FRAGMENTS.length);
-        for (HostInfo info : FRAGMENTS) {
+        List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(sFragmentsInfo.size());
+        for (HostInfo info : sFragmentsInfo) {
             fragmentClasses.add(info.fragmentClass);
         }
 
@@ -77,9 +85,58 @@ public class MainActivity extends FragmentActivity {
         vViewPager.setOnPageChangeListener(new MainBarPagerListener());
     }
 
+    private void updateFragments() {
+        if (mAppStateManager.getLoginState() == AppStateManager.LoginState.LOGGED_OUT) {
+            switchLoginForAppointmentsTab();
+        } else if (mAppStateManager.getLoginState() == AppStateManager.LoginState.LOGGED_IN) {
+            switchAppointmentsForLoginTab();
+        }
+    }
+
+    public void switchLoginForAppointmentsTab() {
+        int loginIndex = sFragmentsInfo.indexOf(LoginFragment.HOST_INFO);
+        if (loginIndex == -1)
+            return;
+
+        sFragmentsInfo.set(loginIndex, AppointmentsFragment.HOST_INFO);
+        List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(sFragmentsInfo.size());
+        for (HostInfo info : sFragmentsInfo) {
+            fragmentClasses.add(info.fragmentClass);
+        }
+
+        // Update view pager
+        mPagerAdapter.swapFragment(loginIndex, AppointmentsFragment.HOST_INFO.fragmentClass);
+    }
+
+    public void switchAppointmentsForLoginTab() {
+        int appointmentsIndex = sFragmentsInfo.indexOf(AppointmentsFragment.HOST_INFO);
+        if (appointmentsIndex == -1)
+            return;
+
+        sFragmentsInfo.set(appointmentsIndex, LoginFragment.HOST_INFO);
+        List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(sFragmentsInfo.size());
+        for (HostInfo info : sFragmentsInfo) {
+            fragmentClasses.add(info.fragmentClass);
+        }
+
+        // Update view pager
+        mPagerAdapter.swapFragment(appointmentsIndex, LoginFragment.HOST_INFO.fragmentClass);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_logout);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AppStateManager.getInstance().logOut();
+                switchAppointmentsForLoginTab();
+                return true;
+            }
+        });
+
         return true;
     }
 
@@ -111,7 +168,7 @@ public class MainActivity extends FragmentActivity {
             if (vViewPager.getCurrentItem() != position) {
                 vViewPager.setCurrentItem(position, true);
             }
-            vDescription.setText(FRAGMENTS[position].labelStringId);
+            vDescription.setText(sFragmentsInfo.get(position).labelStringId);
         }
     }
 
@@ -122,7 +179,7 @@ public class MainActivity extends FragmentActivity {
             if (vTabContainer.getSelectedTabPosition() != position) {
                 vTabContainer.selectTabAt(position);
             }
-            vDescription.setText(FRAGMENTS[position].labelStringId);
+            vDescription.setText(sFragmentsInfo.get(position).labelStringId);
         }
 
         @Override

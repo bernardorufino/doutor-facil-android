@@ -9,7 +9,9 @@
     <string name="date_label">Date</string>
     <string name="insurance_label">Insurance</string>
     <string name="my_appointments_label">My Appointments</string>
+    <string name="login_label">Login</string>
     <string name="search_label">Search</string>
+    <string name="logout_label">Log out</string>
 
     <!-- Use for internal context only -->
     <string name="to_be_changed_programmatically" translatable="false"></string>

@@ -1,9 +1,12 @@
 package br.com.drfacil.android.fragments.appointments;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
 import br.com.drfacil.android.model.Appointment;
 import br.com.drfacil.android.views.AppointmentCardView;
 import com.google.common.collect.ImmutableList;
@@ -22,7 +25,11 @@ public class AppointmentsAdapter extends BaseAdapter {
 
     public void update(List<Appointment> appointments) {
         mAppointments = ImmutableList.copyOf(appointments);
-        notifyDataSetChanged();
+        new Handler(Looper.getMainLooper()).post(new Runnable(){
+            public void run(){
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
