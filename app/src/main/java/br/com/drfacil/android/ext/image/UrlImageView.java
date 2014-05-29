@@ -9,8 +9,8 @@ import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import br.com.drfacil.android.R;
+import br.com.drfacil.android.helpers.AsyncHelper;
 import br.com.drfacil.android.helpers.CustomHelper;
-import br.com.drfacil.android.helpers.FuturesHelper;
 import com.google.common.base.Objects;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -81,7 +81,7 @@ public class UrlImageView extends ImageView {
             mFuture.cancel(true);
         }
         mFuture = mDownloader.download(url);
-        FuturesHelper.addCallbackOnUiThread(mFuture, new ImageDownloadedCallback(url));
+        AsyncHelper.addCallbackOnUiThread(mFuture, new ImageDownloadedCallback(url));
     }
 
     public String getUrl() {
