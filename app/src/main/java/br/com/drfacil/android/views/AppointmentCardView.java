@@ -57,7 +57,7 @@ public class AppointmentCardView extends FrameLayout {
         Professional professional = mAppointment.getProfessional();
         vDoctorName.setText(professional.getName());
         vAddress.setText(getAddress(professional));
-        vSpecialty.setText(professional.getSpecialty());
+        vSpecialty.setText(professional.getSpecialty().toString());
         vUrlImage.setUrl(professional.getImageUrl());
     }
 
