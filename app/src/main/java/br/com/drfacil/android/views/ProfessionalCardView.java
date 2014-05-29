@@ -55,7 +55,7 @@ public class ProfessionalCardView extends FrameLayout {
         vName.setText(mProfessional.getName());
         vAddress.setText(getAddress());
         vRating.setRating(mProfessional.getRating());
-        vSpecialty.setText(mProfessional.getSpecialty());
+        vSpecialty.setText(mProfessional.getSpecialty().toString());
         vImage.setUrl(mProfessional.getImageUrl());
     }
 

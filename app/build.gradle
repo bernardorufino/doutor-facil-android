@@ -28,6 +28,9 @@ dependencies {
     compile 'com.google.guava:guava-jdk5:16.0'
     compile 'com.android.support:support-v4:19.0.+'
     compile 'com.jakewharton:disklrucache:2.0.+'
+    compile 'com.squareup:android-times-square:1.1.+@aar'
+    compile 'com.squareup.retrofit:retrofit:1.5.+'
+    compile 'com.squareup.okhttp:okhttp:1.5.+'
 
 }
 

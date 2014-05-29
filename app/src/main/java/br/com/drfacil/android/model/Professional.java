@@ -1,52 +1,33 @@
 package br.com.drfacil.android.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import static com.google.common.base.Preconditions.checkArgument;
 
-// TODO: Add telephone numbers to model
-public class Professional extends Model implements Parcelable {
+public class Professional extends Model {
 
     public static final int MAX_RATING = 5;
 
     private String mName;
-    private Address mAddress;
-    private String mSpecialty;
     private String mImageUrl;
+    private Address mAddress;
+    private Specialty mSpecialty;
+    private Insurance mInsurance;
     private int mRating;
 
-    public Professional(int id, String name, Address address, String specialty, String imageUrl, int rating) {
+    public Professional(
+            int id,
+            String name,
+            Address address,
+            Specialty specialty,
+            Insurance insurance,
+            String imageUrl,
+            int rating) {
         super(id);
         mName = name;
         mAddress = address;
         mSpecialty = specialty;
+        mInsurance = insurance;
         mImageUrl = imageUrl;
         setRating(rating);
-    }
-
-    private Professional(Parcel in) {
-        super(in);
-        mName = in.readString();
-        mAddress = in.readParcelable(Address.class.getClassLoader());
-        mSpecialty = in.readString();
-        mImageUrl = in.readString();
-        setRating(in.readInt());
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeString(mName);
-        dest.writeParcelable(mAddress, flags);
-        dest.writeString(mSpecialty);
-        dest.writeString(mImageUrl);
-        dest.writeInt(mRating);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     public Address getAddress() {
@@ -66,24 +47,27 @@ public class Professional extends Model implements Parcelable {
         return mName;
     }
 
-    public String getSpecialty() {
+    public Specialty getSpecialty() {
         return mSpecialty;
+    }
+
+    public Insurance getInsurance() {
+        return mInsurance;
     }
 
     public String getImageUrl() {
         return mImageUrl;
     }
 
-    public static final Creator<Professional> CREATOR = new Creator<Professional>() {
-
-        @Override
-        public Professional createFromParcel(Parcel in) {
-            return new Professional(in);
-        }
-
-        @Override
-        public Professional[] newArray(int size) {
-            return new Professional[size];
-        }
-    };
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("-- Professional: ").append(mName).append("\n");
+        s.append("image_url = ").append(mImageUrl).append("\n");
+        s.append("rating = ").append(mRating).append("\n");
+        s.append("specialty = ").append(mSpecialty).append("\n");
+        s.append("insurance = ").append(mInsurance).append("\n");
+        s.append("address = ").append(mAddress).append("\n");
+        return s.toString();
+    }
 }
