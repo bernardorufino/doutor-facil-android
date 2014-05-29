@@ -135,4 +135,24 @@
         <item name="android:adjustViewBounds">true</item>
     </style>
 
+    <!-- Tab -->
+
+    <style name="TabIcon">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
+    <!-- Main Bar -->
+
+    <style name="MainBarLogo">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_marginLeft">4dp</item>
+    </style>
+
+    <style name="MainBarDescription">
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginLeft">7dp</item>
+        <item name="android:textColor">@color/main_bar_description</item>
+    </style>
+
 </resources>

@@ -23,4 +23,14 @@
     <color name="professional_card_desc_text">#FF666666</color>
     <color name="professional_card_image_tint">#22000000</color>
 
+    <!-- Tab -->
+
+    <color name="tab_tick">#FFFFFFFF</color>
+    <color name="tab_pressed_bg">#33000000</color>
+
+    <!-- Main Bar -->
+
+    <color name="main_bar">#FF458149</color>
+    <color name="main_bar_description">#FFFFFFFF</color>
+
 </resources>

@@ -1,6 +1,5 @@
 package br.com.drfacil.android.activities;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,15 +7,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import br.com.drfacil.android.R;
 import br.com.drfacil.android.ext.tabbed.SimpleFragmentPagerAdapter;
-import br.com.drfacil.android.ext.tabbed.SynchronizedTabListenerAdapter;
-import br.com.drfacil.android.ext.tabbed.SynchronizedViewChangeListenerAdapter;
 import br.com.drfacil.android.fragments.appointments.AppointmentsFragment;
 import br.com.drfacil.android.fragments.search.SearchFragment;
+import br.com.drfacil.android.views.TabContainerView;
+import br.com.drfacil.android.views.TabView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends FragmentActivity {
@@ -26,7 +27,9 @@ public class MainActivity extends FragmentActivity {
             AppointmentsFragment.HOST_INFO
     };
 
-    private ViewPager mViewPager;
+    private ViewPager vViewPager;
+    private TabContainerView vTabContainer;
+    private TextView vDescription;
     private FragmentPagerAdapter mPagerAdapter;
 
     @Override
@@ -38,7 +41,9 @@ public class MainActivity extends FragmentActivity {
 
     private void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        vViewPager = (ViewPager) findViewById(R.id.pager);
+        vTabContainer = (TabContainerView) findViewById(R.id.main_bar_tab_container);
+        vDescription = (TextView) findViewById(R.id.main_bar_description);
     }
 
     private void initTabs() {
@@ -52,25 +57,24 @@ public class MainActivity extends FragmentActivity {
                 .byFragmentClasses(fragmentClasses)
                 .setFragmentManager(getSupportFragmentManager())
                 .build();
-        mViewPager.setAdapter(mPagerAdapter);
+        vViewPager.setAdapter(mPagerAdapter);
 
-        // Tabs > view pager
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        ActionBar.TabListener tabListener = new SynchronizedTabListenerAdapter().setViewPager(mViewPager);
-        for (HostInfo info : FRAGMENTS) {
-            String label = getString(info.labelStringId);
-            ActionBar.Tab tab = actionBar
-                    .newTab()
-                    .setText(label)
-                    .setTabListener(tabListener);
-            actionBar.addTab(tab);
-        }
+        // Add Tabs
+        vTabContainer.addTabs(Arrays.asList(
+                new TabView(
+                        getApplicationContext(),
+                        getResources().getDrawable(R.drawable.ic_action_search_holo_light),
+                        getResources().getDrawable(R.drawable.ic_action_search_white)),
+                new TabView(
+                        getApplicationContext(),
+                        getResources().getDrawable(R.drawable.ic_action_event_holo_light),
+                        getResources().getDrawable(R.drawable.ic_action_event_white))));
 
-        // View pager > tabs
-        ViewPager.OnPageChangeListener pageChangeListener = new SynchronizedViewChangeListenerAdapter()
-                .setActionBar(actionBar);
-        mViewPager.setOnPageChangeListener(pageChangeListener);
+        // Tabs > ViewPager, Description
+        vTabContainer.setOnTabSelectedListener(new MainBarTabListener());
+
+        // ViewPager > Tabs, Description
+        vViewPager.setOnPageChangeListener(new MainBarPagerListener());
     }
 
     @Override
@@ -98,5 +102,33 @@ public class MainActivity extends FragmentActivity {
             this.labelStringId = labelStringId;
             this.fragmentClass = fragmentClass;
         }
+    }
+
+    private class MainBarTabListener implements TabContainerView.OnTabSelectedListener {
+
+        @Override
+        public void onTabSelected(TabView tab, int position) {
+            if (vViewPager.getCurrentItem() != position) {
+                vViewPager.setCurrentItem(position, true);
+            }
+            vDescription.setText(FRAGMENTS[position].labelStringId);
+        }
+    }
+
+    private class MainBarPagerListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageSelected(int position) {
+            if (vTabContainer.getSelectedTabPosition() != position) {
+                vTabContainer.selectTabAt(position);
+            }
+            vDescription.setText(FRAGMENTS[position].labelStringId);
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { /* Empty */ }
+
+        @Override
+        public void onPageScrollStateChanged(int state) { /* Empty */ }
     }
 }

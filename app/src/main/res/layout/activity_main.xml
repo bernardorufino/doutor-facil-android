@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.view.ViewPager
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pager"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    >
 
-</android.support.v4.view.ViewPager>
+    <RelativeLayout
+        android:id="@+id/main_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bar_height"
+        android:background="@color/main_bar"
+        >
+
+        <ImageView
+            android:id="@+id/main_bar_logo"
+            android:layout_width="@dimen/main_bar_logo_dimen"
+            android:layout_height="@dimen/main_bar_logo_dimen"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_logo"
+            style="@style/MainBarLogo"
+            />
+
+        <TextView
+            android:id="@+id/main_bar_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/main_bar_logo"
+            android:layout_centerVertical="true"
+            style="@style/MainBarDescription"
+            />
+
+        <br.com.drfacil.android.views.TabContainerView
+            android:id="@+id/main_bar_tab_container"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/main_bar_tab_container_width"
+            android:layout_height="match_parent"
+            custom:tab_container_pressed_bg_color="@color/tab_pressed_bg"
+            custom:tab_container_tick_color="@color/tab_tick"
+            custom:tab_container_tick_height="@dimen/main_bar_tab_tick_height"
+            />
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/main_bar"
+        tools:context=".activities.MainActivity"
+        />
+
+</RelativeLayout>

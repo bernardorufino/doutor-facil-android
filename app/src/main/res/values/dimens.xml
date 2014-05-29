@@ -8,4 +8,13 @@
     <dimen name="appointment_card_doctor_container_width">120dp</dimen>
     <dimen name="appointment_card_button_height">40dp</dimen>
 
+    <!-- Main Bar -->
+    <dimen name="main_bar_height">48dp</dimen>
+    <dimen name="main_bar_logo_dimen">32dp</dimen>
+    <dimen name="main_bar_tab_container_width">120dp</dimen>
+    <dimen name="main_bar_tab_tick_height">5dp</dimen>
+
+    <!-- Tab Container View -->
+    <dimen name="tab_container_view_default_tick_height">10dp</dimen>
+
 </resources>

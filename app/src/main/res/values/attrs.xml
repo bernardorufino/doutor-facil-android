@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- TODO: Rename these attributes to more specific names, like search_parameter_icon -->
     <declare-styleable name="SearchParameterView">
         <attr name="icon" format="reference"/>
         <attr name="label" format="string" />
@@ -13,6 +14,12 @@
 
     <declare-styleable name="RatingView">
         <attr name="rating" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="TabContainerView">
+        <attr name="tab_container_pressed_bg_color" format="color" />
+        <attr name="tab_container_tick_color" format="color" />
+        <attr name="tab_container_tick_height" format="dimension"/>
     </declare-styleable>
 
 </resources>
