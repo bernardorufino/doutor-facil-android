@@ -18,6 +18,7 @@ import br.com.drfacil.android.fragments.search.parameters.*;
 import br.com.drfacil.android.helpers.AsyncHelper;
 import br.com.drfacil.android.helpers.CustomHelper;
 import br.com.drfacil.android.helpers.CustomViewHelper;
+import br.com.drfacil.android.ext.scroll.BottomViewToggleOnScrollListener;
 import br.com.drfacil.android.model.Professional;
 import br.com.drfacil.android.model.search.Search;
 import com.google.common.collect.ImmutableMap;
@@ -49,6 +50,7 @@ public class SearchFragment extends Fragment
     private static final int SEARCH_RESULTS_LOADER = 0;
 
     private AbsListView vSearchResults;
+    private View vSearchParametersContainer;
     private SearchResultsAdapter mResultsAdapter;
     private Search mSearch;
     private InstanceFactory<SearchParameterFragment> mFragmentFactory;
@@ -97,6 +99,10 @@ public class SearchFragment extends Fragment
         mResultsAdapter = new SearchResultsAdapter(getActivity());
         vSearchResults.setAdapter(mResultsAdapter);
         setSearchViewState(SearchViewState.LOADING);
+        vSearchParametersContainer = getView().findViewById(R.id.search_parameters);
+        BottomViewToggleOnScrollListener listener = new BottomViewToggleOnScrollListener(vSearchParametersContainer)
+                .setReversed(true);
+        vSearchResults.setOnScrollListener(listener);
     }
 
     @Override

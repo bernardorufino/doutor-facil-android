@@ -19,7 +19,7 @@
     <color name="search_parameter_header_bg">#FF458149</color>
     <color name="search_parameter_value_text">#FFFFFFFF</color>
     <color name="search_parameter_divider">#22FFFFFF</color>
-    <color name="search_parameters_bg">#FF458149</color>
+    <color name="search_parameters_bg">#FA458149</color>
     <color name="bg">#FFE8E8E8</color>
 
     <!-- Professional Card -->
