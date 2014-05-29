@@ -3,24 +3,27 @@ package br.com.drfacil.android.ext.image;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import br.com.drfacil.android.Params;
 import br.com.drfacil.android.ext.cache.AbstractTwoLevelCache;
+import br.com.drfacil.android.helpers.AsyncHelper;
 import br.com.drfacil.android.helpers.CacheHelper;
 import br.com.drfacil.android.helpers.CustomHelper;
 import com.google.common.base.Throwables;
 import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.SettableFuture;
+import com.squareup.okhttp.OkHttpClient;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CachedBitmapDownloader
         extends AbstractTwoLevelCache<String, Bitmap>
@@ -46,6 +49,9 @@ public class CachedBitmapDownloader
         return sInstance;
     }
 
+    private OkHttpClient mClient = new OkHttpClient();
+    private Map<String, ListenableFuture<BitmapInfo>> mPendingRequests = new ConcurrentHashMap<>();
+
     private CachedBitmapDownloader(
             File diskCacheDirectory,
             int appVersion,
@@ -57,19 +63,26 @@ public class CachedBitmapDownloader
     @Override
     protected ValueHolder<Bitmap> create(String url) {
         for (int i = 1; i <= RETRY_TIMES; i++) {
+            HttpURLConnection connection = null;
             try {
+                connection = mClient.open(new URL(url));
                 CustomHelper.log("Attempt #" + i + " of downloading bitmap");
-                URLConnection connection = new URL(url).openConnection();
-                // connection.setUseCaches(true);
-                Bitmap bitmap = BitmapFactory.decodeStream(connection.getInputStream());
-                if (bitmap != null) {
-                    CustomHelper.log("Returning bitmap");
-                    return new ValueHolder<>(bitmap, bitmap.getByteCount());
+                InputStream inputStream = null;
+                try {
+                    inputStream = connection.getInputStream();
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    if (bitmap != null) {
+                        return new ValueHolder<>(bitmap, bitmap.getByteCount());
+                    }
+                    CustomHelper.log("null bitmap on attempt #" + i);
+                } finally {
+                    if (inputStream != null) inputStream.close();
                 }
-                CustomHelper.log("null bitmap on attempt #" + i);
             } catch (IOException e) {
                 CustomHelper.log("Error on attempt #" + i);
                 CustomHelper.logException(e);
+            } finally {
+                if (connection != null) connection.disconnect();
             }
         }
         return null;
@@ -112,37 +125,37 @@ public class CachedBitmapDownloader
     @Override
     protected void handleDiskException(IOException e) {
         Throwables.propagate(e);
-//        CustomHelper.logException("Disk cache exception!", e);
     }
 
     @Override
-    public ListenableFuture<BitmapInfo> download(String url) {
-        SettableFuture<BitmapInfo> future = SettableFuture.create();
-        new FetchBitmapTask(future).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
+    public ListenableFuture<BitmapInfo> download(final String url) {
+        ListenableFuture<BitmapInfo> future = mPendingRequests.get(url);
+        if (future != null) return future;
+        future = AsyncHelper.executeTask(new FetchBitmapTask(url));
+        mPendingRequests.put(url, future);
         return future;
     }
 
-    private class FetchBitmapTask extends AsyncTask<String, Void, Void> {
+    private class FetchBitmapTask implements Callable<BitmapInfo> {
 
-        private final SettableFuture<BitmapInfo> mFuture;
+        private String mUrl;
 
-        public FetchBitmapTask(SettableFuture<BitmapInfo> future) {
-            mFuture = future;
+        private FetchBitmapTask(String url) {
+            mUrl = url;
         }
 
         @Override
-        protected Void doInBackground(String... params) {
-            String url = params[0];
-            Location location = contains(url);
+        public BitmapInfo call() throws Exception {
+            Location location = contains(mUrl);
             BitmapOrigin origin = locationToOrigin(location);
-            Bitmap bitmap = CachedBitmapDownloader.this.get(url);
+            Bitmap bitmap = CachedBitmapDownloader.this.get(mUrl);
+            mPendingRequests.remove(mUrl);
             if (bitmap != null) {
-                mFuture.set(new BitmapInfo(bitmap, origin));
+                CustomHelper.log("Returning bitmap " + hash(mUrl) + " from " + origin);
+                return new BitmapInfo(bitmap, origin);
             } else {
-                mFuture.setException(new RuntimeException("Bitmap returned from " + origin + " is null"));
+                throw new RuntimeException("Bitmap returned from " + origin + " is null");
             }
-            CustomHelper.log("Returning bitmap " + hash(url) + " from " + origin);
-            return null;
         }
     }
 
