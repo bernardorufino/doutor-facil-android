@@ -1,7 +1,6 @@
 package br.com.drfacil.android.ext.scroll;
 
 import android.widget.AbsListView;
-import br.com.drfacil.android.helpers.CustomHelper;
 import br.com.drfacil.android.helpers.CustomViewHelper;
 
 public abstract class InfinityScrollListener implements AbsListView.OnScrollListener {
@@ -32,7 +31,7 @@ public abstract class InfinityScrollListener implements AbsListView.OnScrollList
             mLastFirstVisibleItem = firstVisibleItem;
         }
         int cumulativeScroll = mBaseScroll + scroll;
-        CustomHelper.log("scroll = " + cumulativeScroll);
+        // CustomHelper.log("scroll = " + cumulativeScroll);
         onInfinityScroll(view, cumulativeScroll);
         mLastScroll = scroll;
     }
