@@ -1,6 +1,5 @@
 package br.com.drfacil.android.activities;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,21 +8,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.common.collect.Lists;
-
 import br.com.drfacil.android.R;
 import br.com.drfacil.android.ext.tabbed.SimpleFragmentPagerAdapter;
 import br.com.drfacil.android.fragments.appointments.AppointmentsFragment;
+import br.com.drfacil.android.fragments.login.LoginFragment;
 import br.com.drfacil.android.fragments.search.SearchFragment;
+import br.com.drfacil.android.managers.AppStateManager;
 import br.com.drfacil.android.views.TabContainerView;
 import br.com.drfacil.android.views.TabView;
-import br.com.drfacil.android.fragments.login.LoginFragment;
-import br.com.drfacil.android.managers.AppStateManager;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MainActivity extends FragmentActivity {
 
@@ -35,8 +34,6 @@ public class MainActivity extends FragmentActivity {
     private ViewPager vViewPager;
     private TabContainerView vTabContainer;
     private TextView vDescription;
-    private ViewPager mViewPager;
-    private ActionBar.TabListener mTabListener;
     private SimpleFragmentPagerAdapter mPagerAdapter;
     private AppStateManager mAppStateManager = AppStateManager.getInstance();
 
@@ -85,6 +82,17 @@ public class MainActivity extends FragmentActivity {
         vViewPager.setOnPageChangeListener(new MainBarPagerListener());
     }
 
+    // Propagate back to nested fragments
+    @Override
+    public void onBackPressed() {
+        int i = vViewPager.getCurrentItem();
+        Fragment fragment = mPagerAdapter.getItem(i);
+        boolean popped = fragment.getChildFragmentManager().popBackStackImmediate();
+        if (!popped) {
+            super.onBackPressed();
+        }
+    }
+
     private void updateFragments() {
         if (mAppStateManager.getLoginState() == AppStateManager.LoginState.LOGGED_OUT) {
             switchLoginForAppointmentsTab();
@@ -128,7 +136,7 @@ public class MainActivity extends FragmentActivity {
         getMenuInflater().inflate(R.menu.main, menu);
 
         MenuItem item = menu.findItem(R.id.action_logout);
-        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        checkNotNull(item).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 AppStateManager.getInstance().logOut();

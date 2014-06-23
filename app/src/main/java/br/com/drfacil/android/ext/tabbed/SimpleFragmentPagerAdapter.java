@@ -3,7 +3,6 @@ package br.com.drfacil.android.ext.tabbed;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> mFragments;
     private FragmentManager mFragmentManager;
-
     private Fragment mOldFragment;
 
     private SimpleFragmentPagerAdapter(List<Fragment> fragments, FragmentManager fm) {

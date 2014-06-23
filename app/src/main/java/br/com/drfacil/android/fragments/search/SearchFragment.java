@@ -14,6 +14,7 @@ import br.com.drfacil.android.ext.instance.InstanceFactory;
 import br.com.drfacil.android.ext.instance.LazyWeakFactory;
 import br.com.drfacil.android.ext.observing.Observable;
 import br.com.drfacil.android.ext.observing.Observer;
+import br.com.drfacil.android.fragments.profile.ProfileFragment;
 import br.com.drfacil.android.fragments.search.parameters.*;
 import br.com.drfacil.android.helpers.AsyncHelper;
 import br.com.drfacil.android.helpers.CustomHelper;
@@ -21,6 +22,7 @@ import br.com.drfacil.android.helpers.CustomViewHelper;
 import br.com.drfacil.android.ext.scroll.BottomViewToggleOnScrollListener;
 import br.com.drfacil.android.model.Professional;
 import br.com.drfacil.android.model.search.Search;
+import br.com.drfacil.android.views.ProfessionalCardView;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -53,13 +55,14 @@ public class SearchFragment extends Fragment
     private View vSearchParametersContainer;
     private SearchResultsAdapter mResultsAdapter;
     private Search mSearch;
-    private InstanceFactory<SearchParameterFragment> mFragmentFactory;
+    private InstanceFactory<SearchParameterFragment> mParameterFragmentFactory;
     private ProgressBar vLoadingSpin;
     private Button vRetryButton;
     private ViewGroup vRetryContainer;
     private ViewGroup vLoadingContainer;
     private TextView vRetryMessage;
     private ListenableFuture<Void> mParamsFuture;
+    private InstanceFactory<ProfileFragment> mProfileFragmentFactory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,9 +77,10 @@ public class SearchFragment extends Fragment
         } else {
             mSearch.registerObserver(this);
         }
-        mFragmentFactory = new LazyWeakFactory.WithFixedArgumentBuilder()
+        mParameterFragmentFactory = new LazyWeakFactory.WithFixedArgumentBuilder()
                 .argument(Search.class, mSearch)
                 .build();
+        mProfileFragmentFactory = new LazyWeakFactory.WithFixedArgumentBuilder().build();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -96,7 +100,7 @@ public class SearchFragment extends Fragment
         for (int id : PARAMS_FRAGMENTS.keySet()) {
             getView().findViewById(id).setOnClickListener(mOnParamClickListener);
         }
-        mResultsAdapter = new SearchResultsAdapter(getActivity());
+        mResultsAdapter = new SearchResultsAdapter(getActivity(), mOnCardClickListener);
         vSearchResults.setAdapter(mResultsAdapter);
         setSearchViewState(SearchViewState.LOADING);
         vSearchParametersContainer = getView().findViewById(R.id.search_parameters);
@@ -123,6 +127,20 @@ public class SearchFragment extends Fragment
         CustomViewHelper.toggleVisibleGone(vRetryContainer, state == SearchViewState.RETRY);
     }
 
+    private final View.OnClickListener mOnCardClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ProfessionalCardView card = (ProfessionalCardView) v;
+            ProfileFragment profileFragment = mProfileFragmentFactory.getInstance(ProfileFragment.class);
+            profileFragment.setProfessional(card.getProfessional());
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.search_container, profileFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
+    };
+
     private final View.OnClickListener mOnRetryClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -136,8 +154,8 @@ public class SearchFragment extends Fragment
         public void onClick(View v) {
             Class<? extends SearchParameterFragment> type = PARAMS_FRAGMENTS.get(v.getId());
             checkState(type != null, "Unidentified click handled as search parameter click");
-            mFragmentFactory.clear();
-            SearchParameterFragment fragment = mFragmentFactory.getInstance(type);
+            mParameterFragmentFactory.clear();
+            SearchParameterFragment fragment = mParameterFragmentFactory.getInstance(type);
             fragment.show(getFragmentManager(), type.toString());
         }
     };

@@ -14,10 +14,12 @@ import java.util.List;
 public class SearchResultsAdapter extends BaseAdapter {
 
     private final Context mContext;
+    private final View.OnClickListener mOnCardClickListener;
     private List<Professional> mProfessionals = new ArrayList<>();
 
-    public SearchResultsAdapter(Context context) {
+    public SearchResultsAdapter(Context context, View.OnClickListener onCardClickListener) {
         mContext = context;
+        mOnCardClickListener = onCardClickListener;
     }
 
     public void update(List<Professional> professionals) {
@@ -45,6 +47,7 @@ public class SearchResultsAdapter extends BaseAdapter {
         ProfessionalCardView card = (convertView instanceof ProfessionalCardView)
                 ? (ProfessionalCardView) convertView
                 : new ProfessionalCardView(mContext);
+        card.setOnClickListener(mOnCardClickListener);
         Professional professional = getItem(position);
         if (card.getProfessional() != professional) {
             card.setProfessional(professional);
