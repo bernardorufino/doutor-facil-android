@@ -8,10 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import br.com.drfacil.android.Hardcoded;
 import br.com.drfacil.android.R;
 import br.com.drfacil.android.activities.MainActivity;
+import br.com.drfacil.android.ext.instance.InstanceFactory;
+import br.com.drfacil.android.ext.instance.LazyWeakFactory;
+import br.com.drfacil.android.fragments.appointments.buttons.AppointmentButtonFragment;
+import br.com.drfacil.android.fragments.appointments.buttons.AppointmentCancelButtonFragment;
+import br.com.drfacil.android.fragments.appointments.buttons.AppointmentEditButtonFragment;
+import br.com.drfacil.android.fragments.appointments.buttons.AppointmentLocationButtonFragment;
+import br.com.drfacil.android.fragments.profile.ProfileFragment;
+import br.com.drfacil.android.model.Address;
 import br.com.drfacil.android.model.Appointment;
+import br.com.drfacil.android.model.Professional;
+import br.com.drfacil.android.views.AppointmentCardView;
+import org.joda.time.DateTime;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +37,15 @@ public class AppointmentsFragment extends Fragment
 
     private ListView mAppointmentsList;
     private AppointmentsAdapter mAppointmentsAdapter;
+    private InstanceFactory<AppointmentButtonFragment> mButtonFragmentFactory;
+    private InstanceFactory<ProfileFragment> mProfileFragmentFactory;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mButtonFragmentFactory = new LazyWeakFactory.WithFixedArgumentBuilder().build();
+        mProfileFragmentFactory = new LazyWeakFactory.WithFixedArgumentBuilder().build();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +56,7 @@ public class AppointmentsFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAppointmentsList = (ListView) getView().findViewById(R.id.appointments_list);
-        mAppointmentsAdapter = new AppointmentsAdapter(getActivity());
+        mAppointmentsAdapter = new AppointmentsAdapter(getActivity(), mOnAppointmentCardClickListener);
         mAppointmentsList.setAdapter(mAppointmentsAdapter);
     }
 
@@ -46,6 +65,42 @@ public class AppointmentsFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(APPOINTMENTS_LOADER, null, this);
     }
+
+    // TODO: Add tags
+    private final AppointmentCardView.OnAppointmentCardClickListener mOnAppointmentCardClickListener = new AppointmentCardView.OnAppointmentCardClickListener() {
+        @Override
+        public void onPictureClick(Professional professional) {
+            ProfileFragment profileFragment = mProfileFragmentFactory.getInstance(ProfileFragment.class);
+            profileFragment
+                    .setProfessional(professional)
+                    .setScheduleStartDate(DateTime.now().minusHours(2))
+                    .setScheduleEndDate(DateTime.now().plusDays(7))
+                    .tryUpdateView();
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.appointments_container, profileFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+        @Override
+        public void onLocationButtonClick(Address address) {
+            AppointmentLocationButtonFragment locationButtonFragment = mButtonFragmentFactory.getInstance(AppointmentLocationButtonFragment.class);
+            locationButtonFragment.show(getFragmentManager(), "");
+        }
+
+        @Override
+        public void onEditButtonClick() {
+            AppointmentEditButtonFragment editButtonFragment = mButtonFragmentFactory.getInstance(AppointmentEditButtonFragment.class);
+            editButtonFragment.show(getFragmentManager(), "");
+        }
+
+        @Override
+        public void onCancelButtonClick() {
+            AppointmentCancelButtonFragment cancelButtonFragment = mButtonFragmentFactory.getInstance(AppointmentCancelButtonFragment.class);
+            cancelButtonFragment.show(getFragmentManager(), "");
+        }
+    };
 
     @Override
     public Loader<List<Appointment>> onCreateLoader(int loader, Bundle args) {

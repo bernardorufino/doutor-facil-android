@@ -25,7 +25,7 @@ import java.util.Date;
 
 public class ApiManager {
 
-    private static final boolean LOCAL_DEBUG = true; // For Genymotion
+    private static final boolean LOCAL_DEBUG = false; // For Genymotion
     private static final String ENDPOINT = (LOCAL_DEBUG) ? "http://10.0.3.2:5000" : "http://drfacil.herokuapp.com";
     private static final long CACHE_SIZE = 64 * 1024; // In bytes
     private static ApiManager sInstance;

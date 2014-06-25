@@ -61,13 +61,15 @@
         >
 
         <ImageView
-            android:src="@drawable/ic_action_map_holo_light"
+            android:id="@+id/appointment_card_location_button"
+            android:src="@drawable/ic_action_location_holo_light"
             style="@style/AppointmentCardButton"
             />
 
         <View style="@style/AppointmentCardButtonDivider" />
 
         <ImageView
+            android:id="@+id/appointment_card_edit_button"
             android:src="@drawable/ic_action_edit_holo_light"
             style="@style/AppointmentCardButton"
             />
@@ -75,6 +77,7 @@
         <View style="@style/AppointmentCardButtonDivider" />
 
         <ImageView
+            android:id="@+id/appointment_card_cancel_button"
             android:src="@drawable/ic_action_cancel_holo_light"
             style="@style/AppointmentCardButton"
             />
@@ -90,12 +93,14 @@
         style="@style/AppointmentCardDescContainer"
         >
 
+        <!--TODO: Unhardcode email-->
         <TextView
-            android:id="@+id/appointment_card_location"
-            android:drawableLeft="@drawable/ic_action_location_holo_light"
+            android:id="@+id/appointment_card_email"
+            android:drawableLeft="@drawable/ic_action_unread_holo_light"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_weight="1"
+            android:text="doutor@gmail.com"
             style="@style/ProfessionalCardDescText"
             />
 

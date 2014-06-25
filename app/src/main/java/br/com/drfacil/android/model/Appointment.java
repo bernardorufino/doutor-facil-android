@@ -1,17 +1,18 @@
 package br.com.drfacil.android.model;
 
+import org.joda.time.DateTime;
+
 // TODO: Implement Parcelable
+// TODO: DateAndTime
 public class Appointment extends Model {
 
     private Professional mProfessional;
-    private String mDate;
-    private String mTime;
+    private DateTime mDateTime;
 
-    public Appointment(int id, Professional professional, String date, String time) {
+    public Appointment(int id, Professional professional, DateTime dateTime) {
         super(id);
         mProfessional = professional;
-        mDate = date;
-        mTime = time;
+        mDateTime = dateTime;
     }
 
     public Professional getProfessional() {
@@ -23,18 +24,14 @@ public class Appointment extends Model {
     }
 
     public String getDate() {
-        return mDate;
-    }
-
-    public void setDate(String mDate) {
-        this.mDate = mDate;
+        return mDateTime.toString("MMMM, dd") + " of "+ mDateTime.toString("yyyy");
     }
 
     public String getTime() {
-        return mTime;
+        return mDateTime.toString("HH:mm");
     }
 
-    public void setTime(String mTime) {
-        this.mTime = mTime;
+    public Address getAddress() {
+        return getProfessional().getAddress();
     }
 }

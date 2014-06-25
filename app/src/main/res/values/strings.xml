@@ -29,5 +29,13 @@
     <string name="send_email_label">Send Email</string>
     <string name="confirm_appointment_title">Confirm Appointment</string>
     <string name="confirm_appointment_message">Schedule appointment with %1$s at %2$s?</string>
+    <string name="appointment_cancel_header">Cancel Appointment</string>
+    <string name="appointment_cancel_message">This doctor doesn\'t allow to cancel the appointment through the app.
+        Please contact via phone or email.
+    </string>
+    <string name="appointment_edit_header">Reschedule Appointment</string>
+    <string name="appointment_edit_message">This doctor doesn\'t allow the reschedule of the appointment through the
+        app. Please contact via phone or email.
+    </string>
 
 </resources>

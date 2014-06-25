@@ -6,6 +6,7 @@ import br.com.drfacil.android.model.Insurance;
 import br.com.drfacil.android.model.Professional;
 import br.com.drfacil.android.model.Specialty;
 import com.google.common.collect.ImmutableList;
+import org.joda.time.DateTime;
 
 import java.util.List;
 
@@ -189,9 +190,9 @@ public class Hardcoded {
     }
 
     public static List<Appointment> APPOINTMENTS = ImmutableList.of(
-            new Appointment(1, PROFESSIONALS.get(0), "15 de Dezembro", "15:30"),
-            new Appointment(2, PROFESSIONALS.get(1), "11 de Fevereiro", "16:30"),
-            new Appointment(3, PROFESSIONALS.get(2), "10 de Março", "19:00"),
-            new Appointment(4, PROFESSIONALS.get(3), "8 de Abril", "10:45"),
-            new Appointment(5, PROFESSIONALS.get(4), "23 de Setembro", "17:00"));
+            new Appointment(1, PROFESSIONALS.get(0), DateTime.now()),
+            new Appointment(2, PROFESSIONALS.get(1), DateTime.now().plusDays(1)),
+            new Appointment(3, PROFESSIONALS.get(2), DateTime.now().plusDays(2)),
+            new Appointment(4, PROFESSIONALS.get(3), DateTime.now().plusDays(3)),
+            new Appointment(5, PROFESSIONALS.get(4), DateTime.now().plusDays(4)));
 }

@@ -18,9 +18,12 @@ public class AppointmentsAdapter extends BaseAdapter {
 
     private final Context mContext;
     private List<Appointment> mAppointments = new ArrayList<>();
+    private AppointmentCardView.OnAppointmentCardClickListener mOnAppointmentCardClickListener;
 
-    public AppointmentsAdapter(Context context) {
+    public AppointmentsAdapter(Context context,
+                               AppointmentCardView.OnAppointmentCardClickListener onAppointmentCardClickListener) {
         mContext = context;
+        mOnAppointmentCardClickListener = onAppointmentCardClickListener;
     }
 
     public void update(List<Appointment> appointments) {
@@ -52,6 +55,7 @@ public class AppointmentsAdapter extends BaseAdapter {
         AppointmentCardView card = (convertView instanceof AppointmentCardView)
                 ? (AppointmentCardView) convertView
                 : new AppointmentCardView(mContext);
+        card.setOnAppointmentCardClickListener(mOnAppointmentCardClickListener);
         Appointment appointment = getItem(position);
         if (card.getAppointment() != appointment) {
             card.setAppointment(appointment);
