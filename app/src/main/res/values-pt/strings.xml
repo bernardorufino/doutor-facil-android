@@ -13,5 +13,7 @@
     <string name="search_label">Pesquisa</string>
     <string name="logout_label">Logout</string>
     <string name="send_email_label">Enviar Email</string>
+    <string name="confirm_appointment_title">Confirmar Marcação</string>
+    <string name="confirm_appointment_message">Deseja marcar consulta com %1$s as %2$s?</string>
 
 </resources>

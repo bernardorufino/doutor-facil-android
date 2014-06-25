@@ -9,14 +9,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/date_label"
+        android:text="@string/confirm_appointment_title"
         style="@style/DialogHeader"
         />
 
-    <com.squareup.timessquare.CalendarPickerView
-        android:id="@+id/search_param_date_calendar"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+    <TextView
+        android:id="@+id/confirm_appointment_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/to_be_changed_programmatically"
         />
 
     <include

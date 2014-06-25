@@ -11,8 +11,6 @@
     tools:ignore="Overdraw"
     >
 
-        <!-- TODO: Unhardcode values -->
-
         <br.com.drfacil.android.views.SearchParameterView
             android:id="@+id/search_parameter_specialty"
             android:layout_width="0dp"

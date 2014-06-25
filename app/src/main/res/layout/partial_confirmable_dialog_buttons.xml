@@ -8,7 +8,7 @@
     >
 
     <Button
-        android:id="@+id/search_parameter_dismiss_button"
+        android:id="@+id/confirmable_dialog_dismiss_button"
         android:text="@string/dismiss_search_param"
         style="@style/SearchParamsButton"
         />
@@ -18,7 +18,7 @@
         />
 
     <Button
-        android:id="@+id/search_parameter_ok_button"
+        android:id="@+id/confirmable_dialog_ok_button"
         android:text="@string/ok_search_param"
         style="@style/SearchParamsButton"
         />

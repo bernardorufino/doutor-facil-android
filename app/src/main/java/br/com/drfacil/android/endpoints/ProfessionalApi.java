@@ -19,9 +19,9 @@ public interface ProfessionalApi {
             @Query("end_date") DateTime endDate,
             @Query("insurance_ids") String insuranceIds);
 
-    @GET("/professionals/{id}/slots")
+    @GET("/professional/{id}/slots")
     public List<Slot> slots(
-            @Path("id") long id,
+            @Path("id") long slotId,
             @Query("start_date") DateTime startDate,
             @Query("end_date") DateTime endDate);
 

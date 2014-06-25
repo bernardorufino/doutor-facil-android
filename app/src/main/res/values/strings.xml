@@ -27,5 +27,7 @@
     <string name="error_client_error">Local error, if it persists restart the app</string>
     <string name="error_server_error">Server error, try again later</string>
     <string name="send_email_label">Send Email</string>
+    <string name="confirm_appointment_title">Confirm Appointment</string>
+    <string name="confirm_appointment_message">Schedule appointment with %1$s at %2$s?</string>
 
 </resources>

@@ -26,6 +26,10 @@ public class AppStateManager {
         return loginState;
     }
 
+    public Patient getLoggedInPatient() {
+        return loggedInPatient;
+    }
+
     public void logIn(Patient patient) {
         loginState = LoginState.LOGGED_IN;
         loggedInPatient = patient;

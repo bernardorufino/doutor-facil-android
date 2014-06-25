@@ -18,9 +18,14 @@ public class ProfileScheduleAdapter extends BaseAdapter {
 
     private final Context mContext;
     private List<DayEntry> mDayEntries = new ArrayList<>();
+    private ProfileScheduleItemView.OnSlotClickListener mOnSlotClickListener;
 
     public ProfileScheduleAdapter(Context context) {
         mContext = context;
+    }
+
+    public void setOnSlotClickListener(ProfileScheduleItemView.OnSlotClickListener onSlotClickListener) {
+        mOnSlotClickListener = onSlotClickListener;
     }
 
     public void update(List<Slot> slots) {
@@ -52,6 +57,7 @@ public class ProfileScheduleAdapter extends BaseAdapter {
         ProfileScheduleItemView view = (convertView instanceof ProfileScheduleItemView)
                 ? (ProfileScheduleItemView) convertView
                 : new ProfileScheduleItemView(mContext);
+        if (mOnSlotClickListener != null) view.setOnSlotClickListener(mOnSlotClickListener);
         DayEntry entry = getItem(position);
         if (!Objects.equal(view.getDay(), entry.day)) {
             view.setDay(entry.day);

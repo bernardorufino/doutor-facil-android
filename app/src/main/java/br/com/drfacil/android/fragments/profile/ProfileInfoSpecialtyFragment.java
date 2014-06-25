@@ -1,4 +1,4 @@
-package br.com.drfacil.android.fragments.profile.infos;
+package br.com.drfacil.android.fragments.profile;
 
 import android.app.Dialog;
 import android.os.Bundle;

@@ -22,7 +22,7 @@
         />
 
     <include
-        layout="@layout/partial_search_param_buttons"
+        layout="@layout/partial_confirmable_dialog_buttons"
         />
 
 </LinearLayout>

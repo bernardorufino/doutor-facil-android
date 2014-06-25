@@ -120,20 +120,11 @@
 
     <!-- Schedule -->
 
-    <ListView
-        android:id="@+id/profile_schedule"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profile_data"
-        android:layout_alignParentBottom="true"
-        android:scrollbars="vertical"
-        />
-
     <RelativeLayout
         android:id="@+id/profile_progress_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/profile_schedule"
+        android:layout_alignTop="@+id/profile_schedule"
         android:layout_alignBottom="@id/profile_schedule"
         android:visibility="gone"
         >
@@ -147,5 +138,13 @@
 
     </RelativeLayout>
 
+    <ListView
+        android:id="@id/profile_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_data"
+        android:layout_alignParentBottom="true"
+        android:scrollbars="vertical"
+        />
 
 </RelativeLayout>

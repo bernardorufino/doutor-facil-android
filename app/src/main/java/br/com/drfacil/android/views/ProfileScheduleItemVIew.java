@@ -2,6 +2,7 @@ package br.com.drfacil.android.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import br.com.drfacil.android.R;
@@ -18,6 +19,7 @@ public class ProfileScheduleItemView extends RelativeLayout {
     private FlowLayout vSlots;
     private List<Slot> mSlots;
     private LocalDate mDay;
+    private OnSlotClickListener mOnSlotClickListener;
 
     public ProfileScheduleItemView(Context context) {
         super(context);
@@ -63,10 +65,28 @@ public class ProfileScheduleItemView extends RelativeLayout {
         if (mSlots != null) {
             vSlots.removeAllViews();
             for (Slot slot : mSlots) {
-                TextView v = (TextView) inflate(getContext(), R.layout.profile_schedule_item_slot, null);
-                v.setText(slot.getStartDate().toString("HH:mm"));
-                vSlots.addView(v);
+                createSlotView(slot);
             }
         }
+    }
+
+    private void createSlotView(final Slot slot) {
+        TextView v = (TextView) inflate(getContext(), R.layout.profile_schedule_item_slot, null);
+        v.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnSlotClickListener != null) mOnSlotClickListener.onClick(slot);
+            }
+        });
+        v.setText(slot.getStartDate().toString("HH:mm"));
+        vSlots.addView(v);
+    }
+
+    public void setOnSlotClickListener(OnSlotClickListener onSlotClickListener) {
+        mOnSlotClickListener = onSlotClickListener;
+    }
+
+    public interface OnSlotClickListener {
+        public void onClick(Slot slot);
     }
 }
