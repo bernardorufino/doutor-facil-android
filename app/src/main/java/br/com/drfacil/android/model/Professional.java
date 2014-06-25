@@ -1,5 +1,9 @@
 package br.com.drfacil.android.model;
 
+import com.google.common.collect.ImmutableList;
+
+import java.util.List;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 /* TODO: Implement Parcelable */
@@ -8,50 +12,69 @@ public class Professional extends Model {
 
     public static final int MAX_RATING = 5;
 
-    private String mName;
     private String mEmail = "bermonruf@gmail.com";
     private String mPhone = "(12) 99428-4547";
+    private String mFirstName;
+    private String mLastName;
     private String mImageUrl;
     private Address mAddress;
-    private Specialty mSpecialty;
-    private Insurance mInsurance;
+    private List<Specialty> mSpecialties;
+    private List<Insurance> mInsurances;
     private int mRating;
     private int mAboutMeText;
 
     public Professional(
-            int id,
-            String name,
+            String id,
+            String firstName,
+            String lastName,
             Address address,
-            Specialty specialty,
-            Insurance insurance,
-            String imageUrl,
-            int rating) {
-        this(id, name, "bermonruf@gmail.com", "(12) 99428-4547", address, specialty, insurance, imageUrl, rating);
-    }
-
-    public Professional(
-            int id,
-            String name,
-            String email,
-            String phone,
-            Address address,
-            Specialty specialty,
-            Insurance insurance,
+            List<Specialty> specialties,
+            List<Insurance> insurances,
             String imageUrl,
             int rating) {
         super(id);
-        mName = name;
-        mEmail = email;
-        mPhone = phone;
+        mFirstName = firstName;
+        mLastName = lastName;
         mAddress = address;
-        mSpecialty = specialty;
-        mInsurance = insurance;
+        mSpecialties = ImmutableList.copyOf(specialties);
+        mInsurances = ImmutableList.copyOf(insurances);
         mImageUrl = imageUrl;
         setRating(rating);
     }
 
-    public String getName() {
-        return mName;
+    /* TODO: remove backwards compatibility constructor */
+    public Professional(
+            String id,
+            String name,
+            Address address,
+            List<Specialty> specialties,
+            List<Insurance> insurances,
+            String imageUrl,
+            int rating) {
+        this(id, name, "bermonruf@gmail.com", "(12) 99428-4547", address, specialties, insurances, imageUrl, rating);
+    }
+
+    public Professional(
+            String id,
+            String name,
+            String email,
+            String phone,
+            Address address,
+            List<Specialty> specialties,
+            List<Insurance> insurances,
+            String imageUrl,
+            int rating) {
+        super(id);
+        mEmail = email;
+        mPhone = phone;
+        String[] names = name.split("[ ]");
+        mFirstName = names[0];
+        mLastName = names[1];
+        mAddress = address;
+        mSpecialties = ImmutableList.copyOf(specialties);
+        mInsurances = ImmutableList.copyOf(insurances);
+        mImageUrl = imageUrl;
+        setRating(rating);
     }
 
     public String getEmail() {
@@ -75,12 +98,20 @@ public class Professional extends Model {
         mRating = rating;
     }
 
-    public Specialty getSpecialty() {
-        return mSpecialty;
+    public String getName() {
+        return mFirstName + " " + mLastName;
     }
 
-    public Insurance getInsurance() {
-        return mInsurance;
+    public List<Specialty> getSpecialties() {
+        return mSpecialties;
+    }
+
+    public Specialty getSpecialty() {
+        return mSpecialties.get(0);
+    }
+
+    public List<Insurance> getInsurances() {
+        return mInsurances;
     }
 
     public String getImageUrl() {
@@ -93,13 +124,13 @@ public class Professional extends Model {
 
     @Override
     public String toString() {
-        StringBuilder string = new StringBuilder();
-        string.append("-- Professional: ").append(mName).append("\n");
-        string.append("image_url = ").append(mImageUrl).append("\n");
-        string.append("rating = ").append(mRating).append("\n");
-        string.append("specialty = ").append(mSpecialty).append("\n");
-        string.append("insurance = ").append(mInsurance).append("\n");
-        string.append("address = ").append(mAddress).append("\n");
-        return string.toString();
+        StringBuilder s = new StringBuilder();
+        s.append("-- Professional: ").append(getName()).append("\n");
+        s.append("image_url = ").append(mImageUrl).append("\n");
+        s.append("rating = ").append(mRating).append("\n");
+        s.append("specialty = ").append(mSpecialties).append("\n");
+        s.append("insurance = ").append(mInsurances).append("\n");
+        s.append("address = ").append(mAddress).append("\n");
+        return s.toString();
     }
 }

@@ -11,7 +11,7 @@ public class Patient extends Model implements Parcelable {
     private String mBirthDate;
     private String mGender;
 
-    public Patient(int id,
+    public Patient(String id,
                    String email,
                    String firstName,
                    String lastName,
@@ -49,6 +49,11 @@ public class Patient extends Model implements Parcelable {
         return 0;
     }
 
+    @Override
+    public String getId() {
+        return super.getId();
+    }
+
     public String getEmail() {
         return mEmail;
     }
@@ -68,4 +73,17 @@ public class Patient extends Model implements Parcelable {
     public String getGender() {
         return mGender;
     }
+
+    public static final Creator<Patient> CREATOR = new Creator<Patient>() {
+
+        @Override
+        public Patient createFromParcel(Parcel in) {
+            return new Patient(in);
+        }
+
+        @Override
+        public Patient[] newArray(int size) {
+            return new Patient[size];
+        }
+    };
 }

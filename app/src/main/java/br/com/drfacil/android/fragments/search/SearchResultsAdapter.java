@@ -39,7 +39,7 @@ public class SearchResultsAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).getId();
+        return getItem(position).getId().hashCode();
     }
 
     @Override

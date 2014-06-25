@@ -31,6 +31,9 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getItemPosition(Object object) {
+
+        // In order to remove old fragment from viewPager, this getter should return POSITION_NONE
+        // when called with oldFragment as argument
         if (object.equals(mOldFragment)) {
             mOldFragment = null;
             return POSITION_NONE;

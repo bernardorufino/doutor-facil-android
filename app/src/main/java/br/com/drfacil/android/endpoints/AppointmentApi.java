@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AppointmentApi {
 
-    @GET("/patient/{id}/appointments")
+    @GET("/patient/appointments/{id}")
     public List<Appointment> all(
             @Path("id") String patientId);
 

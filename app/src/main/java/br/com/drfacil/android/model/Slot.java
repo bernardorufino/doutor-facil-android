@@ -10,7 +10,7 @@ public class Slot extends Model
     private DateTime mStartDate;
 
     public Slot(
-            int id,
+            String id,
             DateTime startDate) {
         super(id);
         mStartDate = startDate;

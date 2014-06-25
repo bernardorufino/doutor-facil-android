@@ -8,4 +8,8 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <!-- Facebook login theme -->
+    <style name="TranslucentTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
+    </style>
+
 </resources>

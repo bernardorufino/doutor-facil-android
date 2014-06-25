@@ -7,7 +7,7 @@ public class Insurance extends Model implements Parcelable {
 
     private String mName;
 
-    public Insurance(int id, String name) {
+    public Insurance(String id, String name) {
         super(id);
         mName = name;
     }

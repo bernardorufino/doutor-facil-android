@@ -9,7 +9,7 @@ public class Appointment extends Model {
     private Professional mProfessional;
     private DateTime mDateTime;
 
-    public Appointment(int id, Professional professional, DateTime dateTime) {
+    public Appointment(String id, Professional professional, DateTime dateTime) {
         super(id);
         mProfessional = professional;
         mDateTime = dateTime;

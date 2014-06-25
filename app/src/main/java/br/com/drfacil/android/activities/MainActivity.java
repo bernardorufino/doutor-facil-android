@@ -131,16 +131,15 @@ public class MainActivity extends FragmentActivity {
 
     private void updateFragments() {
         if (mAppStateManager.getLoginState() == AppStateManager.LoginState.LOGGED_OUT) {
-            switchLoginForAppointmentsTab();
+            switchFromLoginToAppointmentsTab();
         } else if (mAppStateManager.getLoginState() == AppStateManager.LoginState.LOGGED_IN) {
-            switchAppointmentsForLoginTab();
+            switchFromAppointmentsToLoginTab();
         }
     }
 
-    public void switchLoginForAppointmentsTab() {
+    public void switchFromLoginToAppointmentsTab() {
         int loginIndex = sFragmentsInfo.indexOf(LoginFragment.HOST_INFO);
-        if (loginIndex == -1)
-            return;
+        if (loginIndex == -1) return;
 
         sFragmentsInfo.set(loginIndex, AppointmentsFragment.HOST_INFO);
         List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(sFragmentsInfo.size());
@@ -152,10 +151,9 @@ public class MainActivity extends FragmentActivity {
         mPagerAdapter.swapFragment(loginIndex, AppointmentsFragment.HOST_INFO.fragmentClass);
     }
 
-    public void switchAppointmentsForLoginTab() {
+    public void switchFromAppointmentsToLoginTab() {
         int appointmentsIndex = sFragmentsInfo.indexOf(AppointmentsFragment.HOST_INFO);
-        if (appointmentsIndex == -1)
-            return;
+        if (appointmentsIndex == -1) return;
 
         sFragmentsInfo.set(appointmentsIndex, LoginFragment.HOST_INFO);
         List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(sFragmentsInfo.size());
@@ -176,7 +174,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 AppStateManager.getInstance().logOut();
-                switchAppointmentsForLoginTab();
+                switchFromAppointmentsToLoginTab();
                 return true;
             }
         });

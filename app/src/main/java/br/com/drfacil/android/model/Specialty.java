@@ -7,7 +7,7 @@ public class Specialty extends Model implements Parcelable {
 
     private String mName;
 
-    public Specialty(int id, String name) {
+    public Specialty(String id, String name) {
         super(id);
         mName = name;
     }

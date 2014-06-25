@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Address extends Model implements Parcelable {
 
     private String mStreet;
-    private String mZip;
+    private String mZipCode;
     private String mNumber;
     private String mComplement;
     private String mCity;
@@ -14,7 +14,7 @@ public class Address extends Model implements Parcelable {
     private String mCountry;
 
     public Address(
-            int id,
+            String id,
             String street,
             String zip,
             String number,
@@ -24,7 +24,7 @@ public class Address extends Model implements Parcelable {
             String country) {
         super(id);
         mStreet = street;
-        mZip = zip;
+        mZipCode = zip;
         mNumber = number;
         mComplement = complement;
         mCity = city;
@@ -35,7 +35,7 @@ public class Address extends Model implements Parcelable {
     private Address(Parcel in) {
         super(in);
         mStreet = in.readString();
-        mZip = in.readString();
+        mZipCode = in.readString();
         mNumber = in.readString();
         mComplement = in.readString();
         mCity = in.readString();
@@ -47,7 +47,7 @@ public class Address extends Model implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(mStreet);
-        dest.writeString(mZip);
+        dest.writeString(mZipCode);
         dest.writeString(mNumber);
         dest.writeString(mComplement);
         dest.writeString(mCity);
@@ -65,7 +65,7 @@ public class Address extends Model implements Parcelable {
     }
 
     public String getZip() {
-        return mZip;
+        return mZipCode;
     }
 
     public String getNumber() {
@@ -90,7 +90,7 @@ public class Address extends Model implements Parcelable {
 
     @Override
     public String toString() {
-        return String.format("%s %s %s (%s), %s, %s, %s", mStreet, mNumber, mComplement, mZip, mCity, mState, mCountry);
+        return String.format("%s %s %s (%s), %s, %s, %s", mStreet, mNumber, mComplement, mZipCode, mCity, mState, mCountry);
     }
 
     public static final Creator<Address> CREATOR = new Creator<Address>() {

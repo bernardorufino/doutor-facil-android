@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import br.com.drfacil.android.helpers.AsyncHelper;
 import br.com.drfacil.android.model.Appointment;
 import br.com.drfacil.android.views.AppointmentCardView;
 import com.google.common.collect.ImmutableList;
@@ -28,8 +29,10 @@ public class AppointmentsAdapter extends BaseAdapter {
 
     public void update(List<Appointment> appointments) {
         mAppointments = ImmutableList.copyOf(appointments);
-        new Handler(Looper.getMainLooper()).post(new Runnable(){
-            public void run(){
+
+        AsyncHelper.executeOnUiThread(new Runnable() {
+            @Override
+            public void run() {
                 notifyDataSetChanged();
             }
         });
@@ -47,7 +50,7 @@ public class AppointmentsAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).getId();
+        return getItem(position).getId().hashCode();
     }
 
     @Override

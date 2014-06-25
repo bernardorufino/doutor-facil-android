@@ -25,8 +25,8 @@ import java.util.Date;
 
 public class ApiManager {
 
-    private static final boolean LOCAL_DEBUG = false; // For Genymotion
-    private static final String ENDPOINT = (LOCAL_DEBUG) ? "http://10.0.3.2:5000" : "http://drfacil.herokuapp.com";
+    private static final boolean LOCAL_DEBUG = true; // For Genymotion
+    private static final String ENDPOINT = (LOCAL_DEBUG) ? "http://10.0.3.2:5000" : "http://dr-facil-server.herokuapp.com";
     private static final long CACHE_SIZE = 64 * 1024; // In bytes
     private static ApiManager sInstance;
 
@@ -67,6 +67,7 @@ public class ApiManager {
         mRestAdapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
                 .setClient(new OkClient(client))
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(gson))
                 .build();
     }

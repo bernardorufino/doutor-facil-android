@@ -4,33 +4,33 @@ import android.os.Parcel;
 
 public abstract class Model {
 
-    private long mId;
+    private String mId;
 
     protected Model(Parcel in) {
-        mId = in.readInt();
+        mId = in.readString();
     }
 
-    public Model(long id) {
+    public Model(String id) {
         mId = id;
     }
 
-    public long getId() {
+    public String getId() {
         return mId;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(mId);
+        dest.writeString(mId);
     }
 
     @Override
     public boolean equals(Object another) {
         if (another == null || another.getClass() != getClass()) return false;
         Model model = (Model) another;
-        return mId == model.mId;
+        return mId.equals(model.mId);
     }
 
     @Override
     public int hashCode() {
-        return (int) (mId ^ (mId >>> 32));
+        return mId.hashCode();
     }
 }

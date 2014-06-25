@@ -9,16 +9,18 @@ public class AppStateManager {
     private Patient loggedInPatient;
 
     private static class AppStateManagerContainer {
-        public static AppStateManager instance = new AppStateManager();
+        public static AppStateManager INSTANCE = new AppStateManager();
     }
 
     private static final AppStateManagerContainer CONTAINER = new AppStateManagerContainer();
 
     public static AppStateManager getInstance() {
-        return CONTAINER.instance;
+        return CONTAINER.INSTANCE;
     }
 
-    private AppStateManager() {}
+    private AppStateManager() {
+        /* Prevents outside instantiation */
+    }
 
     private LoginState loginState = LoginState.LOGGED_OUT;
 

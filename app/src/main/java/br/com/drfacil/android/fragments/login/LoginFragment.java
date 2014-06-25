@@ -19,6 +19,7 @@ import br.com.drfacil.android.R;
 import br.com.drfacil.android.activities.MainActivity;
 import br.com.drfacil.android.endpoints.ApiManager;
 import br.com.drfacil.android.endpoints.LoginApi;
+import br.com.drfacil.android.helpers.AsyncHelper;
 import br.com.drfacil.android.managers.AppStateManager;
 import br.com.drfacil.android.model.Patient;
 
@@ -52,19 +53,6 @@ public class LoginFragment extends Fragment {
 
         authButton.setFragment(this);
         return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        LoginButton authButton = (LoginButton) view.findViewById(R.id.login_with_facebook_button);
-        authButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).switchLoginForAppointmentsTab();
-            }
-        });
     }
 
     @Override
@@ -109,31 +97,42 @@ public class LoginFragment extends Fragment {
         /*TODO: refactor the cast to MainActivity*/
 
         if (state.isOpened()) {
-            Request.newMeRequest(session, new Request.GraphUserCallback() {
+            Request request = Request.newMeRequest(session, new Request.GraphUserCallback() {
                 @Override
-                public void onCompleted(GraphUser graphUser, Response response) {
+                public void onCompleted(final GraphUser graphUser, Response response) {
                     if (graphUser == null || response.getError() != null) return;
-                    requestLogInToServer(graphUser);
+                    AsyncHelper.executeTask(new Runnable() {
+                        @Override
+                        public void run() {
+                            requestLogInToServer(graphUser);
+                        }
+                    });
                 }
             });
-        } else if (state.isClosed()) {
-            ((MainActivity) getActivity()).switchAppointmentsForLoginTab();
+            request.executeAsync();
+
+            // NPE check added because getActivity() was been called on 2nd logout action from a
+            // null fragment
+        } else if (state.isClosed() && getActivity() != null) {
+            ((MainActivity) getActivity()).switchFromAppointmentsToLoginTab();
         }
     }
 
     private void requestLogInToServer(GraphUser graphUser) {
         LoginApi api = ApiManager.getInstance(getActivity()).getApi(LoginApi.class);
-        Patient patient = api.search(graphUser.getUsername(),
-                                        (String) graphUser.getProperty("email"),
-                                        graphUser.getFirstName(),
-                                        graphUser.getLastName(),
-                                        graphUser.getBirthday(),
-                                        (String) graphUser.getProperty("gender")
-                                    );
 
-        if (patient != null) {
-            AppStateManager.getInstance().logIn(patient);
-            ((MainActivity) getActivity()).switchLoginForAppointmentsTab();
+        Patient patient = new Patient(graphUser.getUsername(),
+                (String) graphUser.getProperty("email"),
+                graphUser.getFirstName(),
+                graphUser.getLastName(),
+                graphUser.getBirthday(),
+                (String) graphUser.getProperty("gender"));
+
+        patient = api.create(patient);
+
+        AppStateManager.getInstance().logIn(patient);
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).switchFromLoginToAppointmentsTab();
         }
     }
 }
