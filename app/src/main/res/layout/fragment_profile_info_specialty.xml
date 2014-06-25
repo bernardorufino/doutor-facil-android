@@ -7,22 +7,25 @@
     >
 
     <TextView
+        android:id="@+id/profile_info_specialty_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/specialty_label"
+        android:text="@string/to_be_changed_programmatically"
         style="@style/DialogHeader"
         />
 
-    <ListView
-        android:id="@+id/search_parameter_specialty_list"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:choiceMode="multipleChoice"
-        />
+        android:layout_height="200dp"
+        >
 
-    <include
-        layout="@layout/partial_search_param_buttons"
-        />
+        <TextView
+            android:id="@+id/profile_info_specialty_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            />
+
+    </ScrollView>
 
 </LinearLayout>

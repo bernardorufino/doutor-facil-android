@@ -12,5 +12,6 @@
     <string name="login_label">Login</string>
     <string name="search_label">Pesquisa</string>
     <string name="logout_label">Logout</string>
+    <string name="send_email_label">Enviar Email</string>
 
 </resources>

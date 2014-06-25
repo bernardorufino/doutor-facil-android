@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import br.com.drfacil.android.R;
 import br.com.drfacil.android.model.search.Search;
 import com.squareup.timessquare.CalendarPickerView;
+import org.joda.time.DateTime;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -64,8 +65,8 @@ public class SearchParameterDateFragment extends SearchParameterFragment {
         checkState(dates.size() > 0);
         Date startDate = dates.get(0);
         Date endDate = dates.get(dates.size() - 1);
-        getSearch().setStartDate(startDate);
-        getSearch().setEndDate(endDate);
+        getSearch().setStartDate(new DateTime(startDate));
+        getSearch().setEndDate(new DateTime(endDate));
     }
 
     @Override

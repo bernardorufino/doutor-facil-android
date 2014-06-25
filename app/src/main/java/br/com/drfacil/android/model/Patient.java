@@ -49,11 +49,6 @@ public class Patient extends Model implements Parcelable {
         return 0;
     }
 
-    @Override
-    public long getId() {
-        return super.getId();
-    }
-
     public String getEmail() {
         return mEmail;
     }

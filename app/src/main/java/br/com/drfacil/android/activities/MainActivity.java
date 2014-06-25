@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -35,6 +36,7 @@ public class MainActivity extends FragmentActivity {
     private TabContainerView vTabContainer;
     private TextView vDescription;
     private SimpleFragmentPagerAdapter mPagerAdapter;
+    private List<Stack<CharSequence>> mTitleStacks = new ArrayList<>(sFragmentsInfo.size());
     private AppStateManager mAppStateManager = AppStateManager.getInstance();
 
     @Override
@@ -42,6 +44,15 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         initView(savedInstanceState);
         initTabs();
+        initTitleStacks();
+    }
+
+    private void initTitleStacks() {
+        for (HostInfo info : sFragmentsInfo) {
+            Stack<CharSequence> stack = new Stack<>();
+            stack.push(getResources().getString(info.labelStringId));
+            mTitleStacks.add(stack);
+        }
     }
 
     private void initView(Bundle savedInstanceState) {
@@ -82,6 +93,29 @@ public class MainActivity extends FragmentActivity {
         vViewPager.setOnPageChangeListener(new MainBarPagerListener());
     }
 
+    public Stack<CharSequence> getCurrentTitleStack() {
+        return mTitleStacks.get(vViewPager.getCurrentItem());
+    }
+
+    public void pushAndSetTitle(CharSequence title) {
+        int i = vViewPager.getCurrentItem();
+        mTitleStacks.get(i).push(title);
+        vDescription.setText(title);
+    }
+
+    public void popAndUpdateTitle() {
+        int i = vViewPager.getCurrentItem();
+        Stack<CharSequence> stack = mTitleStacks.get(i);
+        stack.pop();
+        vDescription.setText(stack.peek());
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        pushAndSetTitle(title);
+    }
+
     // Propagate back to nested fragments
     @Override
     public void onBackPressed() {
@@ -90,6 +124,8 @@ public class MainActivity extends FragmentActivity {
         boolean popped = fragment.getChildFragmentManager().popBackStackImmediate();
         if (!popped) {
             super.onBackPressed();
+        } else {
+            popAndUpdateTitle();
         }
     }
 
@@ -176,7 +212,7 @@ public class MainActivity extends FragmentActivity {
             if (vViewPager.getCurrentItem() != position) {
                 vViewPager.setCurrentItem(position, true);
             }
-            vDescription.setText(sFragmentsInfo.get(position).labelStringId);
+            vDescription.setText(mTitleStacks.get(position).peek());
         }
     }
 
@@ -187,7 +223,7 @@ public class MainActivity extends FragmentActivity {
             if (vTabContainer.getSelectedTabPosition() != position) {
                 vTabContainer.selectTabAt(position);
             }
-            vDescription.setText(sFragmentsInfo.get(position).labelStringId);
+            vDescription.setText(mTitleStacks.get(position).peek());
         }
 
         @Override

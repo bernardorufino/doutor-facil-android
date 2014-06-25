@@ -2,11 +2,13 @@ package br.com.drfacil.android;
 
 import br.com.drfacil.android.model.Insurance;
 import br.com.drfacil.android.model.Professional;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.FieldNamingStrategy;
-import com.google.gson.TypeAdapter;
+import com.fatboyindustrial.gsonjodatime.DateTimeConverter;
+import com.google.gson.*;
+import com.google.gson.internal.bind.DateTypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -19,25 +21,16 @@ public class Test {
 
     private static final String ENDPOINT = "http://localhost:5000";
 
-    public static void main(String[] args) {
-        String a = (String) null;
-        System.out.println(a == null);
-//        try {
-//            Gson gson = new GsonBuilder()
-//                     .setFieldNamingStrategy(CustomFieldNamingStrategy.INSTANCE)
-//                     .registerTypeAdapter(Date.class, new DateTypeAdapter())
-//                     .create();
-//            RestAdapter restAdapter = new RestAdapter.Builder()
-//                     .setEndpoint(ENDPOINT)
-//                     .setConverter(new GsonConverter(gson))
-//                     .build();
-//             Api api = restAdapter.create(Api.class);
-//             List<Professional> ps = api.search("1,2,3", "na", new Date(), new Date(), "1,2,3");
-//             Professional p = ps.get(0);
-//             System.out.println(p);
-//        } catch (RetrofitError e) {
-//            System.out.println(e.getResponse().getStatus());
-//        }
+    public static void main(String[] args) throws IOException {
+        Gson gson = new GsonBuilder()
+                .setFieldNamingStrategy(CustomFieldNamingStrategy.INSTANCE)
+                .registerTypeAdapter(Date.class, new DateTypeAdapter())
+                .registerTypeAdapter(DateTime.class, new DateTimeConverter())
+                .create();
+
+//        DateTime dateTime = gson.getAdapter(DateTime.class).fromJson("\"2014-06-24T07:00:00-03:00\"");
+//        System.out.println(dateTime);
+        System.out.println(ISODateTimeFormat.dateTime().print(DateTime.now()));
     }
 
 

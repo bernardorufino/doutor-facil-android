@@ -3,6 +3,7 @@ package br.com.drfacil.android.endpoints;
 import android.content.Context;
 import br.com.drfacil.android.helpers.CacheHelper;
 import br.com.drfacil.android.helpers.CustomHelper;
+import com.fatboyindustrial.gsonjodatime.DateTimeConverter;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
 import com.google.gson.FieldNamingPolicy;
@@ -12,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.internal.bind.DateTypeAdapter;
 import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
+import org.joda.time.DateTime;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
@@ -23,7 +25,7 @@ import java.util.Date;
 
 public class ApiManager {
 
-    private static final boolean LOCAL_DEBUG = false; // For Genymotion
+    private static final boolean LOCAL_DEBUG = true; // For Genymotion
     private static final String ENDPOINT = (LOCAL_DEBUG) ? "http://10.0.3.2:5000" : "http://drfacil.herokuapp.com";
     private static final long CACHE_SIZE = 64 * 1024; // In bytes
     private static ApiManager sInstance;
@@ -59,6 +61,7 @@ public class ApiManager {
         Gson gson = new GsonBuilder()
                 .setFieldNamingStrategy(CustomFieldNamingStrategy.INSTANCE)
                 .registerTypeAdapter(Date.class, new DateTypeAdapter())
+                .registerTypeAdapter(DateTime.class, new DateTimeConverter())
                 .create();
 
         mRestAdapter = new RestAdapter.Builder()

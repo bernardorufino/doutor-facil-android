@@ -2,6 +2,14 @@
 
     <!-- TODO: Extract dimensions -->
 
+    <style name="DialogHeader">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/search_parameter_header_color</item>
+        <item name="android:background">@color/search_parameter_header_bg</item>
+        <item name="android:padding">11dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <!-- Appointment Card -->
 
     <style name="AppointmentCardContainer">
@@ -135,14 +143,6 @@
         <item name="android:adjustViewBounds">true</item>
     </style>
 
-    <style name="SearchParameterHeader">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/search_parameter_header_color</item>
-        <item name="android:background">@color/search_parameter_header_bg</item>
-        <item name="android:padding">11dp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
     <style name="SearchParamsButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -177,6 +177,48 @@
         <item name="android:textSize">18sp</item>
         <item name="android:layout_marginLeft">7dp</item>
         <item name="android:textColor">@color/main_bar_description</item>
+    </style>
+
+    <!-- Profile -->
+
+    <style name="ProfileScheduleItemText">
+        <item name="android:textColor">@color/profile_schedule_date_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ProfileScheduleItemSlot">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#DDDDDD</item>
+        <item name="android:background">#484848</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="ProfileName" parent="ProfessionalCardName">
+    </style>
+
+    <style name="ProfileDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:background">@color/profile_divider</item>
+    </style>
+
+    <style name="ProfileDescription">
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:drawablePadding">0dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textColor">@color/profile_text</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
+    <style name="autoScaleTextView">
+        <!-- use the next line to alter the minimum text size (uncomment first)-->
+        <!-- <item name="@attr/minTextSize">10dp</item> -->
     </style>
 
 </resources>

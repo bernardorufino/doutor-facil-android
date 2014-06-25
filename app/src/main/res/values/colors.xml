@@ -53,4 +53,13 @@
     <color name="main_bar">#FF458149</color>
     <color name="main_bar_description">#FFFFFFFF</color>
 
+    <!-- Profile -->
+
+    <color name="profile_bg">#FFE8E8E8</color>
+    <color name="profile_data_bg">#FFFFFF</color>
+    <color name="profile_divider">#FFD7D7D7</color>
+    <color name="profile_gradient_start">#FFBBBBBB</color>
+    <color name="profile_text">#FF666666</color>
+    <color name="profile_schedule_date_color">#999999</color>
+
 </resources>

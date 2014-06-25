@@ -132,7 +132,11 @@ public class SearchFragment extends Fragment
         public void onClick(View v) {
             ProfessionalCardView card = (ProfessionalCardView) v;
             ProfileFragment profileFragment = mProfileFragmentFactory.getInstance(ProfileFragment.class);
-            profileFragment.setProfessional(card.getProfessional());
+            profileFragment
+                    .setProfessional(card.getProfessional())
+                    .setScheduleStartDate(mSearch.getStartDate())
+                    .setScheduleEndDate(mSearch.getEndDate())
+                    .tryUpdateView();
             getChildFragmentManager()
                     .beginTransaction()
                     .replace(R.id.search_container, profileFragment)

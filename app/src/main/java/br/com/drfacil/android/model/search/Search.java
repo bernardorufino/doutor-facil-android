@@ -16,18 +16,18 @@ import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 public class Search extends AbstractObservable implements Parcelable {
 
     private List<Specialty> mSpecialties = new ArrayList<>();
     private List<Insurance> mInsurances = new ArrayList<>();
-    private Date mStartDate = new Date();
-    private Date mEndDate = new Date();
+    private DateTime mStartDate = DateTime.now();
+    private DateTime mEndDate = DateTime.now().plus(15);
 
     public Search() {
         /* Empty */
@@ -36,16 +36,16 @@ public class Search extends AbstractObservable implements Parcelable {
     public Search(Parcel in) {
         in.readTypedList(mSpecialties, Specialty.CREATOR);
         in.readTypedList(mInsurances, Insurance.CREATOR);
-        mStartDate = new Date(in.readLong());
-        mEndDate = new Date(in.readLong());
+        mStartDate = DateTime.parse(in.readString());
+        mEndDate = DateTime.parse(in.readString());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(mSpecialties);
         dest.writeTypedList(mInsurances);
-        dest.writeLong(mStartDate.getTime());
-        dest.writeLong(mEndDate.getTime());
+        dest.writeString(mStartDate.toString());
+        dest.writeString(mEndDate.toString());
     }
 
     @Override
@@ -110,21 +110,21 @@ public class Search extends AbstractObservable implements Parcelable {
         notifyObservers();
     }
 
-    public Date getStartDate() {
+    public DateTime getStartDate() {
         return mStartDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(DateTime startDate) {
         if (mStartDate.equals(startDate)) return;
         mStartDate = startDate;
         notifyObservers();
     }
 
-    public Date getEndDate() {
+    public DateTime getEndDate() {
         return mEndDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(DateTime endDate) {
         if (mEndDate.equals(endDate)) return;
         mEndDate = endDate;
         notifyObservers();

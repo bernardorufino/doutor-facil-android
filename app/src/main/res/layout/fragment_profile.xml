@@ -1,37 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- TODO: Extract colors, styles and dimensions -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="@color/profile_bg"
     >
 
-    <br.com.drfacil.android.ext.image.UrlImageView
-        android:id="@+id/profile_image"
-        android:layout_width="200dp"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
+    <!-- Image + Map -->
+
+    <RelativeLayout
+        android:id="@+id/profile_image_container"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentLeft="true"
-        android:layout_margin="20dp"
+        android:layout_alignParentTop="true"
+        >
+
+        <br.com.drfacil.android.ext.image.UrlImageView
+            android:id="@+id/profile_image"
+            android:layout_width="match_parent"
+            android:layout_height ="match_parent"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            style="@style/ProfileName"
+            />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_toRightOf="@id/profile_image_container"
+        android:scaleType="centerCrop"
+        android:src="@drawable/map_mock"
         />
 
-    <TextView
-        android:id="@+id/profile_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <!-- Buttons -->
+
+    <LinearLayout
+        android:id="@+id/profile_data"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/profile_data_bg"
+        android:layout_below="@id/profile_image_container"
+        >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/profile_specialty"
+                android:drawableTop="@drawable/ic_action_business_holo_light"
+                android:text="@string/to_be_changed_programmatically"
+                style="@style/ProfileDescription"
+                />
+
+        </RelativeLayout>
+
+        <View style="@style/ProfileDivider" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <br.com.drfacil.android.ext.views.AutoScaleTextView
+                android:id="@+id/profile_email"
+                android:drawableTop="@drawable/ic_action_mail_holo_light"
+                android:text="@string/to_be_changed_programmatically"
+                style="@style/ProfileDescription"
+                />
+
+        </RelativeLayout>
+
+        <View style="@style/ProfileDivider" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/profile_phone"
+                android:drawableTop="@drawable/ic_action_call_holo_light"
+                android:text="@string/to_be_changed_programmatically"
+                style="@style/ProfileDescription"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <!-- Divisor -->
+
+    <View
+        android:layout_below="@id/profile_data"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/profile_data_divider_bg"
         />
 
-    <TextView
-        android:id="@+id/profile_address"
-        android:layout_width="wrap_content"
+    <!-- Schedule -->
+
+    <ListView
+        android:id="@+id/profile_schedule"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_action_location_holo_light"
+        android:layout_below="@id/profile_data"
+        android:layout_alignParentBottom="true"
+        android:scrollbars="vertical"
         />
 
-    <TextView
-        android:id="@+id/profile_specialty"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/profile_progress_spinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_action_business_holo_light"
-        />
+        android:layout_alignTop="@id/profile_schedule"
+        android:layout_alignBottom="@id/profile_schedule"
+        android:visibility="gone"
+        >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
