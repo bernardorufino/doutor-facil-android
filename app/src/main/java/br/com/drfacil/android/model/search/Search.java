@@ -27,7 +27,7 @@ public class Search extends AbstractObservable implements Parcelable {
     private List<Specialty> mSpecialties = new ArrayList<>();
     private List<Insurance> mInsurances = new ArrayList<>();
     private DateTime mStartDate = DateTime.now();
-    private DateTime mEndDate = DateTime.now().plus(15);
+    private DateTime mEndDate = DateTime.now().plusDays(15);
 
     public Search() {
         /* Empty */

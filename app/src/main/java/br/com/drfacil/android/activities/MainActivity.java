@@ -38,6 +38,7 @@ public class MainActivity extends FragmentActivity {
     private SimpleFragmentPagerAdapter mPagerAdapter;
     private List<Stack<CharSequence>> mTitleStacks = new ArrayList<>(sFragmentsInfo.size());
     private AppStateManager mAppStateManager = AppStateManager.getInstance();
+    private AppointmentsFragment mAppointmentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,42 +130,17 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    private void updateFragments() {
-        if (mAppStateManager.getLoginState() == AppStateManager.LoginState.LOGGED_OUT) {
-            switchFromLoginToAppointmentsTab();
-        } else if (mAppStateManager.getLoginState() == AppStateManager.LoginState.LOGGED_IN) {
-            switchFromAppointmentsToLoginTab();
-        }
-    }
-
     public void switchFromLoginToAppointmentsTab() {
-        int loginIndex = sFragmentsInfo.indexOf(LoginFragment.HOST_INFO);
-        if (loginIndex == -1) return;
-
-        sFragmentsInfo.set(loginIndex, AppointmentsFragment.HOST_INFO);
-        List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(sFragmentsInfo.size());
-        for (HostInfo info : sFragmentsInfo) {
-            fragmentClasses.add(info.fragmentClass);
+        if (mAppointmentFragment == null) {
+            mAppointmentFragment = new AppointmentsFragment();
         }
-        updateLoginAppointmentsTitle(loginIndex);
-
-        // Update view pager
-        mPagerAdapter.swapFragment(loginIndex, AppointmentsFragment.HOST_INFO.fragmentClass);
+        mPagerAdapter.getItem(1).getChildFragmentManager().beginTransaction().replace(R.id.login_frag_container, mAppointmentFragment).commit();
     }
 
     public void switchFromAppointmentsToLoginTab() {
-        int appointmentsIndex = sFragmentsInfo.indexOf(AppointmentsFragment.HOST_INFO);
-        if (appointmentsIndex == -1) return;
-
-        sFragmentsInfo.set(appointmentsIndex, LoginFragment.HOST_INFO);
-        List<Class<? extends Fragment>> fragmentClasses = new ArrayList<>(sFragmentsInfo.size());
-        for (HostInfo info : sFragmentsInfo) {
-            fragmentClasses.add(info.fragmentClass);
+        if (mAppointmentFragment != null) {
+            mPagerAdapter.getItem(1).getChildFragmentManager().beginTransaction().remove(mAppointmentFragment).commit();
         }
-        updateLoginAppointmentsTitle(appointmentsIndex);
-
-        // Update view pager
-        mPagerAdapter.swapFragment(appointmentsIndex, LoginFragment.HOST_INFO.fragmentClass);
     }
 
     private void updateLoginAppointmentsTitle(int i) {
@@ -217,6 +193,7 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onTabSelected(TabView tab, int position) {
+            fix();
             if (vViewPager.getCurrentItem() != position) {
                 vViewPager.setCurrentItem(position, true);
             }
@@ -228,6 +205,7 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onPageSelected(int position) {
+            fix();
             if (vTabContainer.getSelectedTabPosition() != position) {
                 vTabContainer.selectTabAt(position);
             }
@@ -239,5 +217,8 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onPageScrollStateChanged(int state) { /* Empty */ }
+    }
+
+    private void fix() {
     }
 }

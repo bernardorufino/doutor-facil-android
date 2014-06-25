@@ -40,6 +40,10 @@ public class AppointmentsFragment extends Fragment
     private InstanceFactory<AppointmentButtonFragment> mButtonFragmentFactory;
     private InstanceFactory<ProfileFragment> mProfileFragmentFactory;
 
+    public AppointmentsFragment() {
+        System.out.println("foo");
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +77,7 @@ public class AppointmentsFragment extends Fragment
             ProfileFragment profileFragment = mProfileFragmentFactory.getInstance(ProfileFragment.class);
             profileFragment
                     .setProfessional(professional)
-                    .setScheduleStartDate(DateTime.now().minusHours(2))
+                    .setScheduleStartDate(DateTime.now())
                     .setScheduleEndDate(DateTime.now().plusDays(7))
                     .tryUpdateView();
             getChildFragmentManager()

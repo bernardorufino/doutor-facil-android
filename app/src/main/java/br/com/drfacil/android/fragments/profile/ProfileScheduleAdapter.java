@@ -7,7 +7,6 @@ import android.widget.BaseAdapter;
 import br.com.drfacil.android.helpers.SlotsHelper;
 import br.com.drfacil.android.model.Slot;
 import br.com.drfacil.android.views.ProfileScheduleItemView;
-import com.google.common.base.Objects;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -59,10 +58,8 @@ public class ProfileScheduleAdapter extends BaseAdapter {
                 : new ProfileScheduleItemView(mContext);
         if (mOnSlotClickListener != null) view.setOnSlotClickListener(mOnSlotClickListener);
         DayEntry entry = getItem(position);
-        if (!Objects.equal(view.getDay(), entry.day)) {
-            view.setDay(entry.day);
-            view.setSlots(entry.slots);
-        }
+        view.setDay(entry.day);
+        view.setSlots(entry.slots);
         return view;
     }
 
