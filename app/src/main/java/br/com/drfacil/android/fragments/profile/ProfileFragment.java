@@ -26,6 +26,7 @@ import br.com.drfacil.android.views.ProfileScheduleItemView;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import org.joda.time.DateTime;
+import retrofit.RetrofitError;
 
 import java.util.List;
 
@@ -168,13 +169,21 @@ public class ProfileFragment extends Fragment {
         protected List<Slot> doInBackground(Void... params) {
             ApiManager apiManager = ApiManager.getInstance(getActivity());
             ProfessionalApi api = apiManager.getApi(ProfessionalApi.class);
-            return api.slots(mProfessional.getId(), mScheduleStartDate, mScheduleEndDate);
+            try {
+                return api.slots(mProfessional.getId(), mScheduleStartDate, mScheduleEndDate);
+            } catch (RetrofitError e) {
+                return null;
+            }
         }
 
         @Override
         protected void onPostExecute(List<Slot> slots) {
             CustomViewHelper.toggleVisibleGone(vProgressBar, false);
-            mScheduleAdapter.update(slots);
+            if (slots != null) {
+                mScheduleAdapter.update(slots);
+            } else {
+                Toast.makeText(getActivity(), R.string.error_unknown_network_error, Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

@@ -146,6 +146,7 @@ public class MainActivity extends FragmentActivity {
         for (HostInfo info : sFragmentsInfo) {
             fragmentClasses.add(info.fragmentClass);
         }
+        updateLoginAppointmentsTitle(loginIndex);
 
         // Update view pager
         mPagerAdapter.swapFragment(loginIndex, AppointmentsFragment.HOST_INFO.fragmentClass);
@@ -160,9 +161,18 @@ public class MainActivity extends FragmentActivity {
         for (HostInfo info : sFragmentsInfo) {
             fragmentClasses.add(info.fragmentClass);
         }
+        updateLoginAppointmentsTitle(appointmentsIndex);
 
         // Update view pager
         mPagerAdapter.swapFragment(appointmentsIndex, LoginFragment.HOST_INFO.fragmentClass);
+    }
+
+    private void updateLoginAppointmentsTitle(int i) {
+        mTitleStacks.get(i).pop();
+        int labelStringId = sFragmentsInfo.get(i).labelStringId;
+        String title = getResources().getString(labelStringId);
+        mTitleStacks.get(i).push(title);
+        vDescription.setText(title);
     }
 
     @Override
