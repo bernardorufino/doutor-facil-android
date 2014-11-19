@@ -80,7 +80,7 @@ public class AppointmentsFragment extends Fragment
                     .setScheduleStartDate(DateTime.now())
                     .setScheduleEndDate(DateTime.now().plusDays(7))
                     .tryUpdateView();
-            getChildFragmentManager()
+            getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.appointments_container, profileFragment)
                     .addToBackStack(null)

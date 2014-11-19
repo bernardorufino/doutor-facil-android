@@ -32,7 +32,7 @@
         android:paddingBottom="@dimen/search_center_padding"
         >
 
-        <include layout="@layout/partial_retry" />
+    <include layout="@layout/partial_retry" />
 
     </FrameLayout>
 

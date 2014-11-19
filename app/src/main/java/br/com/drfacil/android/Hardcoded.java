@@ -45,6 +45,34 @@ public class Hardcoded {
 
     public static List<Professional> PROFESSIONALS = ImmutableList.of(
             new Professional(
+                    "5386e5da9c99ea2f9a1c1a5d", "Rodrigo Roim",
+                    new Address("1", "Rua que saco", "939123-900", "900", "", "Rio de Janeiro", "RJ", "Brazil"),
+                    Arrays.asList(SPECIALTIES.get(12)),
+                    Arrays.asList(INSURANCES.get(1)),
+                    "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/t1.0-1/c2.0.160.160/p160x160/64568_10152205905857905_1012952160_n.jpg",
+                    5),
+            new Professional(
+            "5386e5da9c09ea2f9a1c1a50", "Renan Cruzeiro",
+                    new Address("1", "Vai se fude, porra de mock", "12039123", "129", "", "Vassouras", "Pás", "País das Maravilhas"),
+                    Arrays.asList(SPECIALTIES.get(15)),
+                    Arrays.asList(INSURANCES.get(0)),
+                    "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/t1.0-1/c63.9.115.115/599495_386591934733083_1569059707_n.jpg",
+                    4),
+            new Professional(
+            "53a850fe9c99ea14c3990000", "João da Silva",
+                    new Address("1", "Rua H22A", "12228-453", "123", "", "Rio de Janeiro", "RJ", "Brazil"),
+                    Arrays.asList(SPECIALTIES.get(16)),
+                    Arrays.asList(INSURANCES.get(4)),
+                    "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t1.0-1/p160x160/1375321_496424843786819_1968729283_n.jpg",
+                    2),
+            new Professional(
+            "5386e6260000ea2f9a1c1a5e", "João da Silva",
+                    new Address("1", "Rua H22A", "12228-453", "123", "", "Rio de Janeiro", "RJ", "Brazil"),
+                    Arrays.asList(SPECIALTIES.get(2)),
+                    Arrays.asList(INSURANCES.get(5)),
+                    "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t1.0-1/p160x160/971516_520668877987014_1987117223_n.jpg",
+                    3),
+            new Professional(
                     "1", "André Saraiva",
                     new Address("1", "Rua H22A", "12228-453", "123", "", "Rio de Janeiro", "RJ", "Brazil"),
                     Arrays.asList(SPECIALTIES.get(0)),

@@ -134,7 +134,7 @@ public class MainActivity extends FragmentActivity {
         if (mAppointmentFragment == null) {
             mAppointmentFragment = new AppointmentsFragment();
         }
-        mPagerAdapter.getItem(1).getChildFragmentManager().beginTransaction().replace(R.id.login_frag_container, mAppointmentFragment).commit();
+        mPagerAdapter.getItem(1).getChildFragmentManager().beginTransaction().replace(R.id.login_frag_container, mAppointmentFragment).addToBackStack(((Object) mAppointmentFragment).getClass().toString()).commit();
     }
 
     public void switchFromAppointmentsToLoginTab() {

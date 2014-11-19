@@ -71,13 +71,13 @@
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android-times-square-1.1.1" level="project" />
-    <orderEntry type="library" exported="" name="facebook-android-api-3.14.1" level="project" />
     <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="guava-jdk5-16.0" level="project" />
+    <orderEntry type="library" exported="" name="facebook-android-api-3.18.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.0.1" level="project" />
-    <orderEntry type="library" exported="" name="joda-time-2.3" level="project" />
     <orderEntry type="library" exported="" name="retrofit-1.5.1" level="project" />
     <orderEntry type="library" exported="" name="gson-jodatime-serialisers-1.1.0" level="project" />
+    <orderEntry type="library" exported="" name="joda-time-2.4" level="project" />
     <orderEntry type="library" exported="" name="okhttp-1.5.4" level="project" />
     <orderEntry type="library" exported="" name="disklrucache-2.0.2" level="project" />
   </component>

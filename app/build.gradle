@@ -25,6 +25,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    //compile 'com.android.support:appcompat-v7:20.+'
     compile 'com.google.guava:guava-jdk5:16.0'
     compile 'com.android.support:support-v4:19.0.+'
     compile 'com.jakewharton:disklrucache:2.0.+'

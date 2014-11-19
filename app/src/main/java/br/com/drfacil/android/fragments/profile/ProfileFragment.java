@@ -170,7 +170,7 @@ public class ProfileFragment extends Fragment {
             ApiManager apiManager = ApiManager.getInstance(getActivity());
             ProfessionalApi api = apiManager.getApi(ProfessionalApi.class);
             try {
-                return api.slots(mProfessional.getId(), mScheduleStartDate, mScheduleEndDate);
+                return api.slots(mProfessional.getId(), mScheduleStartDate, mScheduleStartDate.plusDays(5));
             } catch (RetrofitError e) {
                 return null;
             }
